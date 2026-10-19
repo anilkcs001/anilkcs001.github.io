@@ -78,5 +78,19 @@
     "Isolated Storage",
     "SecretText",
     "Business Central"],
-    "summary":"Keep API keys and passwords out of your setup table. Store them encrypted in Isolated Storage, show them masked on the page, and read them back as SecretText.","readingTime":7}
+    "summary":"Keep API keys and passwords out of your setup table. Store them encrypted in Isolated Storage, show them masked on the page, and read them back as SecretText.","readingTime":7
+  },
+  {
+  "slug":"2026-10-19-json-viewer-colour-html-page",
+  "title":"Show request and response JSON in colour on a Business Central page (WebPageViewer)",
+  "date":"2026-10-19",
+  "type":"solution",
+  "tags":["AL",
+  "JSON",
+  "WebPageViewer",
+  "Integration",
+  "Business Central"],
+  "summary":"Build a log page that shows the request and response JSON side by side, indented and colour-coded like a code editor, using the built-in WebPageViewer and a small recursive procedure.",
+  "readingTime":11
+}
 ]

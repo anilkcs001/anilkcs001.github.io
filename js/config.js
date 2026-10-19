@@ -3,7 +3,7 @@
 //  Everything on the Home and About pages comes from here.
 // ============================================================
 window.SITE = {
-  name: 'Your Name',
+  name: 'Anil Kumar Paidimukkala',
   role: 'Business Central Developer',
   tagline: 'Daily notes on issues, new features, code bits and full solutions.',
   location: 'Andhra Pradesh, India',

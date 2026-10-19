@@ -69,7 +69,7 @@ window.SITE = {
       ],
       projects: [
         {
-          name: 'Manipal Academy of Higher Education (MAHE)',
+          name: 'Education Sector',
           duration: 'Current',
           bullets: [
             'Customized Purchase and Finance processes: Purchase Requisitions, Buyer Assignment, CAPEX/OPEX Budgeting, utilization, approvals and procurement controls.',
@@ -81,7 +81,7 @@ window.SITE = {
           ]
         },
         {
-          name: 'Dhunseri Tea Industry',
+          name: 'Tea Industry',
           duration: '16 months',
           bullets: [
             'Converted Tea Industry requirements into AL customizations across Sales, Purchase and Finance processes.',

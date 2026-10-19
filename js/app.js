@@ -22,6 +22,12 @@
   const fmtDate = (d) =>
     new Date(d + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
 
+  // mailto: links open normally; web links open in a new tab
+  const extLink = (l, cls) => {
+    const mail = /^mailto:/i.test(l.url);
+    return `<a${cls ? ` class="${cls}"` : ''} href="${esc(l.url)}"${mail ? '' : ' target="_blank" rel="noopener"'}>${esc(l.label)}${mail || !cls ? '' : ' ↗'}</a>`;
+  };
+
   const badge = (t) => {
     const x = TYPES[t] || { label: t, cls: '' };
     return `<span class="badge ${x.cls}">${esc(x.label)}</span>`;
@@ -31,9 +37,7 @@
 
   function setupShell() {
     document.getElementById('brand').textContent = S.name;
-    const links = (S.links || [])
-      .map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`)
-      .join(' · ');
+    const links = (S.links || []).map((l) => extLink(l, '')).join(' · ');
     document.getElementById('footer').innerHTML =
       `<span>© ${new Date().getFullYear()} ${esc(S.name)}</span><span>${links}</span>`;
 
@@ -89,9 +93,7 @@
     setTitle('');
     const counts = { all: state.posts.length };
     Object.keys(TYPES).forEach((k) => (counts[k] = state.posts.filter((p) => p.type === k).length));
-    const links = (S.links || [])
-      .map((l) => `<a class="pill-link" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`)
-      .join('');
+    const links = (S.links || []).map((l) => extLink(l, 'pill-link')).join('');
 
     app.innerHTML = `
       <section class="hero">
@@ -227,36 +229,78 @@
   function renderAbout() {
     setActiveNav('about');
     setTitle('About');
-    const links = (S.links || [])
-      .map((l) => `<a class="pill-link" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`)
+
+    const chips = (items) =>
+      `<div class="chips">${(items || []).map((i) => `<span class="chip">${esc(i)}</span>`).join('')}</div>`;
+    const bullets = (b) =>
+      (b && b.length) ? `<ul class="bullets">${b.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
+    const section = (title, inner) =>
+      inner ? `<section class="a-sec"><h2>${esc(title)}</h2>${inner}</section>` : '';
+
+    const links = (S.links || []).map((l) => extLink(l, 'pill-link')).join('');
+
+    const stats = (S.stats || [])
+      .map((s) => `<div class="stat"><b>${esc(s.value)}</b><span>${esc(s.label)}</span></div>`)
       .join('');
-    const skills = (S.skills || [])
-      .map((g) => `
-        <div class="skill-group">
-          <h3>${esc(g.group)}</h3>
-          <div class="chips">${g.items.map((i) => `<span class="chip">${esc(i)}</span>`).join('')}</div>
-        </div>`)
-      .join('');
+
+    const summary = (S.summary || []).map((t) => `<p>${esc(t)}</p>`).join('');
+
     const highlights = (S.highlights || [])
-      .map((h) => `
-        <div class="highlight">
-          <h3>${esc(h.title)}</h3>
-          <div class="meta">${esc(h.meta)}</div>
-          <p>${esc(h.text)}</p>
+      .map((h) => `<div class="hl-card"><h3>${esc(h.title)}</h3><p>${esc(h.text)}</p></div>`)
+      .join('');
+
+    const experience = (S.experience || [])
+      .map((job) => `
+        <div class="job">
+          <div class="job-head">
+            <h3>${esc(job.title)}</h3>
+            <div class="meta"><span>${esc(job.company)}</span><span>${esc(job.period)}</span></div>
+          </div>
+          ${bullets(job.bullets)}
+          ${(job.projects || []).length ? `
+            <div class="projects">
+              <h4>Client projects</h4>
+              ${job.projects.map((p) => `
+                <div class="project">
+                  <div class="project-head"><b>${esc(p.name)}</b><span class="meta"><span>${esc(p.duration)}</span></span></div>
+                  ${bullets(p.bullets)}
+                </div>`).join('')}
+            </div>` : ''}
         </div>`)
+      .join('');
+
+    const skills = (S.skills || [])
+      .map((g) => `<div class="skill-group"><h3>${esc(g.group)}</h3>${chips(g.items)}</div>`)
+      .join('');
+
+    const certs = (S.certifications || [])
+      .map((c) => `<div class="cert"><b>${esc(c.title)}</b><span class="muted">${esc(c.note || '')}</span></div>`)
+      .join('');
+
+    const edu = (S.education || [])
+      .map((e) => `<div class="cert"><b>${esc(e.degree)}</b><span class="muted">${esc(e.school)} · ${esc(e.year)}</span></div>`)
       .join('');
 
     app.innerHTML = `
       <section class="about">
+        <div class="eyebrow-line">${esc(S.role)} · ${esc(S.location)}</div>
         <h1>${esc(S.name)}</h1>
-        <div class="role">${esc(S.role)} · ${esc(S.location)}</div>
-        <div class="prose">${(S.about || []).map((t) => `<p>${esc(t)}</p>`).join('')}</div>
-        <div class="link-row" style="margin-top:14px">${links}</div>
-        <h2>Capabilities</h2>${skills}
-        ${highlights ? `<h2>Highlights</h2>${highlights}` : ''}
-        <h2>Writing</h2>
-        <p class="muted">${state.posts.length} posts so far. <a href="#/">Read the latest →</a></p>
+        <div class="prose">${summary}</div>
+        <div class="link-row">${links}<button class="pill-link print-btn" id="print-btn" type="button">Save as PDF</button></div>
+        ${stats ? `<div class="stat-row">${stats}</div>` : ''}
+
+        ${section('Key technical highlights', highlights ? `<div class="hl-grid">${highlights}</div>` : '')}
+        ${section('Experience', experience ? `<div class="timeline">${experience}</div>` : '')}
+        ${section('Functional expertise', chips(S.functional))}
+        ${section('Technical skills', skills)}
+        ${section('Certifications', certs)}
+        ${section('Education', edu)}
+        ${section('Languages', chips(S.languages))}
+        ${section('Writing', `<p class="muted">${state.posts.length} posts so far. <a href="#/">Read the latest →</a></p>`)}
       </section>`;
+
+    const pb = app.querySelector('#print-btn');
+    if (pb) pb.addEventListener('click', () => window.print());
     window.scrollTo(0, 0);
   }
 

@@ -76,4 +76,5 @@ Code blocks tagged `al` are coloured using the Delphi/Pascal grammar, the closes
 | Date | Change |
 |------|--------|
 | 2026-10-19 | Initial version: home, post and about pages, search and filters, dark mode, post tool, 4 sample posts |
+| 2026-10-19 | Questions section under every post: giscus (GitHub Discussions) when configured in `config.js`, email / LinkedIn buttons otherwise |
 | 2026-10-19 | About page rebuilt from resume: summary, stats, key highlights, experience timeline with client projects, grouped skills, certifications, education, Save as PDF |

@@ -174,6 +174,49 @@
     });
   }
 
+  // Questions section: giscus (GitHub Discussions) when configured, otherwise email / LinkedIn
+  function renderAsk(p) {
+    const box = document.getElementById('ask');
+    if (!box) return;
+    const c = S.comments || {};
+
+    if (c.repo && c.repoId && c.categoryId) {
+      box.innerHTML =
+        '<h2>Questions &amp; discussion</h2>' +
+        '<p class="muted">Sign in with GitHub to ask a question or share your own approach.</p>' +
+        '<div class="giscus-wrap"></div>';
+      const attr = document.documentElement.getAttribute('data-theme');
+      const dark = attr ? attr === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const s = document.createElement('script');
+      s.src = 'https://giscus.app/client.js';
+      s.async = true;
+      s.crossOrigin = 'anonymous';
+      const data = {
+        repo: c.repo, 'repo-id': c.repoId,
+        category: c.category || 'Q&A', 'category-id': c.categoryId,
+        mapping: 'specific', term: p.slug, strict: '0',
+        'reactions-enabled': '1', 'emit-metadata': '0',
+        'input-position': 'top', theme: dark ? 'dark' : 'light', lang: 'en'
+      };
+      Object.keys(data).forEach((k) => s.setAttribute('data-' + k, data[k]));
+      box.querySelector('.giscus-wrap').appendChild(s);
+      return;
+    }
+
+    const mail = (S.links || []).find((l) => /^mailto:/i.test(l.url));
+    const li = (S.links || []).find((l) => /linkedin\.com/i.test(l.url));
+    const btns = [];
+    if (mail) {
+      const href = mail.url.split('?')[0] + '?subject=' + encodeURIComponent('Question: ' + p.title);
+      btns.push(`<a class="pill-link" href="${esc(href)}">Ask by email</a>`);
+    }
+    if (li) btns.push(`<a class="pill-link" href="${esc(li.url)}" target="_blank" rel="noopener">Message on LinkedIn ↗</a>`);
+    box.innerHTML =
+      '<h2>Have a question?</h2>' +
+      '<p class="muted">Ask about this post and I will reply. Good questions often become a follow-up post.</p>' +
+      `<div class="link-row">${btns.join('')}</div>`;
+  }
+
   async function renderPost(slug) {
     setActiveNav('home');
     const token = ++routeToken;
@@ -207,12 +250,14 @@
         <div class="prose" id="prose">${window.marked.parse(md)}</div>
         <div class="share"><button class="chip" id="share">Copy link</button></div>
       </article>
+      <section class="ask" id="ask"></section>
       <nav class="pager">
         ${older ? `<a class="prev" href="#/post/${encodeURIComponent(older.slug)}"><small>← Older</small>${esc(older.title)}</a>` : '<span></span>'}
         ${newer ? `<a class="next" href="#/post/${encodeURIComponent(newer.slug)}"><small>Newer →</small>${esc(newer.title)}</a>` : ''}
       </nav>`;
 
     enhanceCode(app.querySelector('#prose'));
+    renderAsk(p);
     app.querySelector('#share').addEventListener('click', async (e) => {
       try {
         await navigator.clipboard.writeText(location.href);

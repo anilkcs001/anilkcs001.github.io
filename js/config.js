@@ -18,6 +18,16 @@ window.SITE = {
     { label: 'Email',    url: 'mailto:anilkcs001@gmail.com' }
   ],
 
+  // Questions under each post (giscus = free, uses GitHub Discussions on your repo).
+  // Leave repoId / categoryId empty and visitors see "Ask by email" and LinkedIn buttons instead.
+  // Get the values at https://giscus.app (see POSTING-GUIDE.md, section 8).
+  comments: {
+    repo: '',        // e.g. 'yourusername/yourusername.github.io'
+    repoId: '',      // e.g. 'R_kgDO...'
+    category: 'Q&A',
+    categoryId: ''   // e.g. 'DIC_kwDO...'
+  },
+
   // ---------- About page ----------
 
   summary: [

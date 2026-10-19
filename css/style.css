@@ -163,6 +163,12 @@ main { padding-top: 40px; padding-bottom: 72px; min-height: 70vh; }
 .highlight .meta { margin: 2px 0 6px; }
 .highlight p { margin: 0; color: var(--muted); font-size: 0.97rem; }
 
+/* Questions section under posts */
+.ask { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); }
+.ask h2 { font-family: var(--font-head); font-size: 1.35rem; letter-spacing: -0.02em; margin: 0 0 6px; }
+.ask p { margin: 0 0 14px; }
+.giscus-wrap { min-height: 120px; }
+
 /* About: profile */
 .about .eyebrow-line { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); letter-spacing: .04em; text-transform: uppercase; }
 .about h1 { margin: 8px 0 16px; }

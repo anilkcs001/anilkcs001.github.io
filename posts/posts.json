@@ -68,5 +68,15 @@
     ],
     "summary": "A loop that looks harmless can send thousands of extra SQL statements. Learn to spot the N+1 pattern in AL, measure it, and fix it four ways.",
     "readingTime": 8
-  }
+  },
+    {"slug":"2026-10-19-isolated-storage-secrets-masked",
+    "title":"Stop storing API keys in a Business Central field: use Isolated Storage and a masked field",
+    "date":"2026-10-19",
+    "type":"solution",
+    "tags":["AL",
+    "Security",
+    "Isolated Storage",
+    "SecretText",
+    "Business Central"],
+    "summary":"Keep API keys and passwords out of your setup table. Store them encrypted in Isolated Storage, show them masked on the page, and read them back as SecretText.","readingTime":7}
 ]

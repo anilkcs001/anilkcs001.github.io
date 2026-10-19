@@ -229,3 +229,19 @@ To answer a question, open the **Discussions** tab of your repo, or reply right 
 - A Copilot or Azure OpenAI experiment and what worked
 
 Keep a running list of topics in a notes file so you never start the day without one.
+
+---
+
+## 10. Let people follow you (one-time setup)
+
+Every post and the home page end with a **Follow along** box. It fills itself from `js/config.js`:
+
+| What shows | How to switch it on |
+|------------|---------------------|
+| **Follow on LinkedIn / GitHub** buttons | Already there for every non-email entry in `links` |
+| **RSS feed** button | Set `siteUrl` (for example `'https://yourusername.github.io'`), then run `node tools/posts.js index`. This creates `feed.xml`, which you commit and push with your posts |
+| **Email subscribe box** | Create a free newsletter account (Buttondown is one option), copy the **form action address** from its embed code into `subscribe.action`, and keep `emailField` as the name of the email input in that code (usually `email`) |
+
+How the email box works: visitors enter their email, the newsletter service stores it, and you send them your new posts from that service. Your site never handles their email addresses.
+
+From then on, run `node tools/posts.js index` after each post as usual. It refreshes `feed.xml` automatically, and RSS readers pick up the new post.

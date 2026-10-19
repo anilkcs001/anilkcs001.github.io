@@ -67,7 +67,8 @@ Code blocks tagged `al` are coloured using the Delphi/Pascal grammar, the closes
 ## 6. Known Limitations
 
 - Because pages use `#` routes, individual posts are not indexed as separate pages by search engines as well as normal URLs would be. If search traffic matters later, move to a static site generator such as Eleventy or Astro; your Markdown posts carry over unchanged.
-- No comments, RSS feed or analytics yet. Comments can be added with a free tool such as giscus; a feed can be generated from `posts.json`.
+- The site has no accounts or follower counter of its own. Comments use giscus (GitHub login), email subscribers live in your newsletter service, and following is via RSS, LinkedIn or GitHub. A built-in follower system would need a database and login service.
+- No visitor analytics yet. A free tool such as GoatCounter can be added with one script tag.
 - Posts must be re-indexed (`node tools/posts.js index`) after editing a post's header.
 - Markdown is rendered as written. Only publish content you wrote yourself.
 
@@ -76,5 +77,6 @@ Code blocks tagged `al` are coloured using the Delphi/Pascal grammar, the closes
 | Date | Change |
 |------|--------|
 | 2026-10-19 | Initial version: home, post and about pages, search and filters, dark mode, post tool, 4 sample posts |
+| 2026-10-19 | "Follow along" box (email subscribe form, RSS feed, LinkedIn/GitHub follow buttons) and automatic `feed.xml` generation |
 | 2026-10-19 | Questions section under every post: giscus (GitHub Discussions) when configured in `config.js`, email / LinkedIn buttons otherwise |
 | 2026-10-19 | About page rebuilt from resume: summary, stats, key highlights, experience timeline with client projects, grouped skills, certifications, education, Save as PDF |

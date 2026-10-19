@@ -18,6 +18,17 @@ window.SITE = {
     { label: 'Email',    url: 'mailto:anilkcs001@gmail.com' }
   ],
 
+  // Your live site address, no trailing slash. Needed for the RSS feed.
+  // Example: 'https://yourusername.github.io'
+  siteUrl: '',
+
+  // Email subscribe box (optional). Use any newsletter service that gives you an embed form,
+  // for example Buttondown. Copy the form's "action" address here. Leave empty to hide the email box.
+  subscribe: {
+    action: '',        // e.g. 'https://buttondown.com/api/emails/embed-subscribe/your-username'
+    emailField: 'email'
+  },
+
   // Questions under each post (giscus = free, uses GitHub Discussions on your repo).
   // Leave repoId / categoryId empty and visitors see "Ask by email" and LinkedIn buttons instead.
   // Get the values at https://giscus.app (see POSTING-GUIDE.md, section 8).

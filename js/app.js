@@ -120,7 +120,8 @@
         <input class="search" id="search" type="search" placeholder="Search posts…" value="${esc(state.q)}" aria-label="Search posts">
       </div>
 
-      <div class="post-list" id="list">${listHtml()}</div>`;
+      <div class="post-list" id="list">${listHtml()}</div>
+      ${followBox()}`;
 
     const syncChips = () =>
       app.querySelectorAll('.chip[data-type]').forEach((c) =>
@@ -172,6 +173,31 @@
         setTimeout(() => (btn.textContent = 'Copy'), 1600);
       });
     });
+  }
+
+  // "Follow along" box: email subscribe form, RSS feed and social follow buttons
+  function followBox() {
+    const sub = S.subscribe || {};
+    const form = sub.action
+      ? `<form class="sub-form" action="${esc(sub.action)}" method="post" target="_blank">
+           <input type="email" name="${esc(sub.emailField || 'email')}" placeholder="you@example.com" required aria-label="Email address">
+           <button class="chip on" type="submit">Subscribe</button>
+         </form>`
+      : '';
+    const btns = [];
+    if (S.siteUrl) btns.push('<a class="pill-link" href="feed.xml">RSS feed</a>');
+    (S.links || []).forEach((l) => {
+      if (/^mailto:/i.test(l.url)) return;
+      btns.push(`<a class="pill-link" href="${esc(l.url)}" target="_blank" rel="noopener">Follow on ${esc(l.label)} ↗</a>`);
+    });
+    if (!form && !btns.length) return '';
+    return `
+      <section class="follow">
+        <h2>Follow along</h2>
+        <p class="muted">${form ? 'Get each new post by email, or follow me where you already are.' : 'Follow me to catch every new post.'}</p>
+        ${form}
+        <div class="link-row">${btns.join('')}</div>
+      </section>`;
   }
 
   // Questions section: giscus (GitHub Discussions) when configured, otherwise email / LinkedIn
@@ -251,6 +277,7 @@
         <div class="share"><button class="chip" id="share">Copy link</button></div>
       </article>
       <section class="ask" id="ask"></section>
+      ${followBox()}
       <nav class="pager">
         ${older ? `<a class="prev" href="#/post/${encodeURIComponent(older.slug)}"><small>← Older</small>${esc(older.title)}</a>` : '<span></span>'}
         ${newer ? `<a class="next" href="#/post/${encodeURIComponent(newer.slug)}"><small>Newer →</small>${esc(newer.title)}</a>` : ''}

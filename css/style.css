@@ -169,6 +169,15 @@ main { padding-top: 40px; padding-bottom: 72px; min-height: 70vh; }
 .ask p { margin: 0 0 14px; }
 .giscus-wrap { min-height: 120px; }
 
+/* Follow box */
+.follow { margin-top: 40px; padding: 22px 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.follow h2 { font-family: var(--font-head); font-size: 1.25rem; letter-spacing: -0.02em; margin: 0 0 4px; }
+.follow p { margin: 0 0 14px; }
+.sub-form { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+.sub-form input { flex: 1 1 220px; max-width: 340px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: inherit; font-size: 0.95rem; }
+.sub-form input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.sub-form button { padding: 9px 20px; }
+
 /* About: profile */
 .about .eyebrow-line { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); letter-spacing: .04em; text-transform: uppercase; }
 .about h1 { margin: 8px 0 16px; }

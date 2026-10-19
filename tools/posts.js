@@ -9,6 +9,7 @@
  */
 const fs = require('fs');
 const path = require('path');
+const vm = require('vm');
 
 const POSTS_DIR = path.join(__dirname, '..', 'posts');
 const TYPES = ['issue', 'feature', 'snippet', 'solution'];
@@ -126,6 +127,45 @@ function buildIndex() {
   posts.sort((a, b) => (b.date + b.slug).localeCompare(a.date + a.slug));
   fs.writeFileSync(path.join(POSTS_DIR, 'posts.json'), JSON.stringify(posts, null, 2) + '\n');
   console.log(`posts.json rebuilt: ${posts.length} post(s)`);
+  writeFeed(posts);
+}
+
+// Reads js/config.js so the site address and name live in one place only
+function loadSite() {
+  const ctx = { window: {} };
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '..', 'js', 'config.js'), 'utf8'), ctx);
+  return ctx.window.SITE || {};
+}
+
+const xmlEsc = (s) =>
+  String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+function writeFeed(posts) {
+  const site = loadSite();
+  const base = (site.siteUrl || '').replace(/\/+$/, '');
+  if (!base) {
+    console.log('feed.xml skipped: set siteUrl in js/config.js to enable the RSS feed');
+    return;
+  }
+  const items = posts.slice(0, 30).map((p) => {
+    const url = `${base}/#/post/${encodeURIComponent(p.slug)}`;
+    return [
+      '    <item>',
+      `      <title>${xmlEsc(p.title)}</title>`,
+      `      <link>${xmlEsc(url)}</link>`,
+      `      <guid isPermaLink="true">${xmlEsc(url)}</guid>`,
+      `      <pubDate>${new Date(p.date + 'T06:00:00Z').toUTCString()}</pubDate>`,
+      `      <description>${xmlEsc(p.summary)}</description>`,
+      '    </item>'
+    ].join('\n');
+  }).join('\n');
+  const xml =
+    '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0">\n  <channel>\n' +
+    `    <title>${xmlEsc(site.name || 'Blog')}</title>\n` +
+    `    <link>${xmlEsc(base)}/</link>\n` +
+    `    <description>${xmlEsc(site.intro || '')}</description>\n${items}\n  </channel>\n</rss>\n`;
+  fs.writeFileSync(path.join(__dirname, '..', 'feed.xml'), xml);
+  console.log('feed.xml rebuilt');
 }
 
 function newPost(args) {

@@ -1,6 +1,6 @@
 ---
 title: Ship a PermissionSet object with every extension
-date: 2026-10-19
+date: 2026-10-18
 type: solution
 tags: AL, Permissions, PTE
 summary: A complete starter permission set so users can be assigned access the moment your extension is installed.

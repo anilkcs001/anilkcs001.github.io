@@ -1,6 +1,6 @@
 ---
 title: Amount in words in RDLC reports (Lakh and Crore, any currency)
-date: 2026-10-19
+date: 2026-10-15
 type: solution
 tags: RDLC, Reports, Amount in Words, India
 summary: Paste one block of VB code into your RDLC report and print any amount in words, in lakhs and crores, for INR and 15 other currencies.

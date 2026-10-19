@@ -1,6 +1,6 @@
 ---
 title: Why `exit` doesn't skip a record in a report
-date: 2026-10-19
+date: 2026-10-17
 type: issue
 tags: AL, Reports
 summary: Calling exit in OnAfterGetRecord leaves the trigger but the row is still printed. Use CurrReport.Skip().

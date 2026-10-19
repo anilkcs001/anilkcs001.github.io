@@ -1,6 +1,6 @@
 ---
 title: Commit every 100 records in AL with mod
-date: 2026-10-19
+date: 2026-10-16
 type: snippet
 tags: AL, Performance, Business Central
 summary: A tiny pattern for long-running batch jobs so one failure doesn't roll back hours of work.

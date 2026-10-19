@@ -1,16 +1,5 @@
 [
-  {
-    "slug": "2026-10-19-welcome-what-to-expect",
-    "title": "Welcome: what to expect from this blog",
-    "date": "2026-10-19",
-    "type": "feature",
-    "tags": [
-      "Meta",
-      "Business Central"
-    ],
-    "summary": "One post a day on real issues, new features, small code bits and complete solutions.",
-    "readingTime": 1
-  },
+
   {
     "slug": "2026-10-19-permission-set-for-every-extension",
     "title": "Ship a PermissionSet object with every extension",
@@ -48,5 +37,19 @@
     ],
     "summary": "A tiny pattern for long-running batch jobs so one failure doesn't roll back hours of work.",
     "readingTime": 1
+  },
+  {
+    "slug": "2026-10-19-amount-in-words-rdlc-report",
+    "title": "Amount in words in RDLC reports (Lakh and Crore, any currency)",
+    "date": "2026-10-19",
+    "type": "solution",
+    "tags": [
+      "RDLC",
+      "Reports",
+      "Amount in Words",
+      "India"
+    ],
+    "summary": "Paste one block of VB code into your RDLC report and print any amount in words, in lakhs and crores, for INR and 15 other currencies.",
+    "readingTime": 6
   }
 ]

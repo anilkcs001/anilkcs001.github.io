@@ -1,0 +1,52 @@
+[
+  {
+    "slug": "2026-10-19-welcome-what-to-expect",
+    "title": "Welcome: what to expect from this blog",
+    "date": "2026-10-19",
+    "type": "feature",
+    "tags": [
+      "Meta",
+      "Business Central"
+    ],
+    "summary": "One post a day on real issues, new features, small code bits and complete solutions.",
+    "readingTime": 1
+  },
+  {
+    "slug": "2026-10-19-permission-set-for-every-extension",
+    "title": "Ship a PermissionSet object with every extension",
+    "date": "2026-10-19",
+    "type": "solution",
+    "tags": [
+      "AL",
+      "Permissions",
+      "PTE"
+    ],
+    "summary": "A complete starter permission set so users can be assigned access the moment your extension is installed.",
+    "readingTime": 1
+  },
+  {
+    "slug": "2026-10-19-exit-vs-currreport-skip",
+    "title": "Why `exit` doesn't skip a record in a report",
+    "date": "2026-10-19",
+    "type": "issue",
+    "tags": [
+      "AL",
+      "Reports"
+    ],
+    "summary": "Calling exit in OnAfterGetRecord leaves the trigger but the row is still printed. Use CurrReport.Skip().",
+    "readingTime": 1
+  },
+  {
+    "slug": "2026-10-19-commit-every-100-records",
+    "title": "Commit every 100 records in AL with mod",
+    "date": "2026-10-19",
+    "type": "snippet",
+    "tags": [
+      "AL",
+      "Performance",
+      "Business Central"
+    ],
+    "summary": "A tiny pattern for long-running batch jobs so one failure doesn't roll back hours of work.",
+    "readingTime": 1
+  }
+]

@@ -1,6 +1,6 @@
 ---
 title: Encryption explained like a story: hashing, AES, RSA, keys, IV and chaining (Part 1)
-date: 2026-10-20
+date: 2026-10-21
 type: snippet
 tags: Security, Encryption, Hashing, AES, RSA
 summary: No coding knowledge needed. Locked boxes, fingerprints, padlocks and suitcases explain hashing, AES, RSA, public and private keys, IV and chaining in plain words.

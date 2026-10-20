@@ -93,5 +93,7 @@
   "summary":"Build a log page that shows the request and response JSON side by side, indented and colour-coded like a code editor, using the built-in WebPageViewer and a small recursive procedure.",
   "readingTime":11
 },
-{"slug":"2026-10-20-singleinstance-vs-bindsubscription","title":"SingleInstance vs BindSubscription: run an event subscriber only when you want it","date":"2026-10-20","type":"solution","tags":["AL","Events","BindSubscription","SingleInstance","Business Central"],"summary":"Need a subscriber to run only during your own process, not every time a user works? See why a SingleInstance flag is risky, and how BindSubscription solves it cleanly.","readingTime":6}
+{"slug":"2026-10-20-singleinstance-vs-bindsubscription","title":"SingleInstance vs BindSubscription: run an event subscriber only when you want it","date":"2026-10-20","type":"solution","tags":["AL","Events","BindSubscription","SingleInstance","Business Central"],"summary":"Need a subscriber to run only during your own process, not every time a user works? See why a SingleInstance flag is risky, and how BindSubscription solves it cleanly.","readingTime":6},
+{"slug":"2026-10-20-encryption-basics-hashing-aes-rsa","title":"Encryption explained like a story: hashing, AES, RSA, keys, IV and chaining (Part 1)","date":"2026-10-20","type":"snippet","tags":["Security","Encryption","Hashing","AES","RSA"],"summary":"No coding knowledge needed. Locked boxes, fingerprints, padlocks and suitcases explain hashing, AES, RSA, public and private keys, IV and chaining in plain words.","readingTime":9}
+
 ]

@@ -50,7 +50,7 @@ window.SITE = {
 
   stats: [
     { value: '3+',  label: 'years in Business Central' },
-    { value: '30+', label: 'RDLC & Excel reports delivered' },
+    { value: '50+', label: 'RDLC & Excel reports delivered' },
     { value: 'MB-820', label: 'Developer Associate certified' },
     { value: '2',   label: 'major client projects' }
   ],
@@ -106,7 +106,7 @@ window.SITE = {
           duration: '16 months',
           bullets: [
             'Converted Tea Industry requirements into AL customizations across Sales, Purchase and Finance processes.',
-            'Developed 30+ complex RDLC and Excel reports covering MIS, operational, financial and year-end reporting across Tea Manufacturing, Sorting, Payroll and Warehouse.',
+            'Developed 50+ complex RDLC and Excel reports covering MIS, operational, financial and year-end reporting across Tea Manufacturing, Sorting, Payroll and Warehouse.',
             'Automated Tea Board sales processing through Excel upload, Sales Invoice creation and settlement and distribution across warehouses, brokers and Tea Board transactions.',
             'Customized Purchase Invoice, warehouse and posting processes, and extended Business Central dimensions from 8 to 13 for richer financial and operational analysis.'
           ]

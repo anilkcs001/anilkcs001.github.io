@@ -6,9 +6,9 @@ tags: AL, PDF, Reports, OnPreRendering, Business Central
 summary: Upload any number of PDFs on a page and download them as one merged file, using only AL and the report OnPreRendering trigger. It works, but the result starts with one blank page. What I tried, and a request for your ideas.
 ---
 
-## The requirement
+## Why I tried this
 
-A user wants to:
+This was not a customer requirement. I was just curious: **can I merge PDFs in Business Central with only AL?** Something simple, like this:
 
 1. Upload two or more PDF files in Business Central.
 2. Click one button.
@@ -19,7 +19,7 @@ Most answers on the internet say you need one of these:
 - a **ControlAddIn** with a JavaScript PDF library, or
 - an **Azure Function** that merges the files outside Business Central.
 
-Both work, but both add something extra to build, host and maintain. This post shows a third way that uses **only AL**. I got the idea from an article by Ali Naqvi on LinkedIn, *[Merge External PDFs in Business Central Reports: No ControlAddIn, No Azure – Just Pure AL](https://www.linkedin.com/pulse/merge-external-pdfs-business-central-reports-azure-just-ali-naqvi-e1dnc)*, and built a small upload-and-merge tool on top of it.
+Both work, but both add something extra to build, host and maintain. Then I read an article by Ali Naqvi on LinkedIn, *[Merge External PDFs in Business Central Reports: No ControlAddIn, No Azure – Just Pure AL](https://www.linkedin.com/pulse/merge-external-pdfs-business-central-reports-azure-just-ali-naqvi-e1dnc)*, and wanted to try it myself with a small upload-and-merge page.
 
 It works. But there is **one problem I could not solve: the merged PDF always starts with a blank page.** I explain what I tried at the end, and I would love your suggestions.
 
@@ -85,7 +85,7 @@ I printed the payload while testing. With two uploaded files, it looked like thi
 }
 ```
 
-Each uploaded PDF became a temp file on the server, and both are listed in `additionalDocuments`. That is exactly what the platform needs to append them.
+Each uploaded PDF became a temp file that the platform manages, and both are listed in `additionalDocuments`. You never write or delete these files yourself. That is exactly what the platform needs to append them.
 
 ## The full code
 
@@ -441,11 +441,11 @@ A minimal layout with one empty text box:
 
 ## Things to know
 
-- **Version:** Microsoft lists this PDF post-processing as available from 2025 release wave 1. I tested on an on-premises server running a newer version. Check your own version before you use it.
+- **Version:** Microsoft lists this PDF post-processing as available from 2025 release wave 1. Check your own version before you use it.
 - **Not for scheduled runs:** Microsoft's documentation lists appending documents as not supported when the report is scheduled, so use it from the web client.
 - **Memory only:** the uploaded files live while the page is open. Close the page and they are gone.
 - **50 files per merge:** AL arrays need a fixed size. Change the number if you need more.
-- **SaaS:** I tested only on-premises. The code itself does not use any server file commands, so it may work online too, but I have not confirmed it.
+- **Works in the cloud:** I tested this on Business Central online (SaaS). The code uses no server file commands such as `File` or `Erase`, so no on-premises target is needed. The PDF Document codeunit writes the temp files for you.
 
 ## The open problem: an extra blank page at the start
 

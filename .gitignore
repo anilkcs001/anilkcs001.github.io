@@ -1,0 +1,24 @@
+# Local install metadata
+.aldc-install/
+
+# Dependencies and local environment
+node_modules/
+.env
+.env.*
+!.env.example
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+.github
+tools
+aldc*
+
+.vscode

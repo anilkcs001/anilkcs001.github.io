@@ -185,5 +185,20 @@
         ],
         "summary": "Four JSON types with confusing names. Once I pictured them as a cupboard, boxes and a parcel, reading JSON in AL became easy. Let's read a real order together, step by step, and write one back.",
         "readingTime": 10
+    },
+    {
+        "slug": "2026-10-26-bc29-table-extension-fields-same-sql-table",
+        "title": "BC 29 changes how table extensions are stored, and why your keys just got more powerful",
+        "date": "2026-10-26",
+        "type": "feature",
+        "tags": [
+            "AL",
+            "Table Extension",
+            "Keys",
+            "Performance",
+            "Business Central"
+        ],
+        "summary": "From Business Central version 29, your table extension fields sit in the same SQL table as the base table. What changed, why it matters for keys, the story of how we got here, and 12 \"Did you know?\" facts on keys, Blobs and SetLoadFields, each explained simply.",
+        "readingTime": 11
     }
 ]

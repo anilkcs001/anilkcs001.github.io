@@ -159,7 +159,7 @@
     {
         "slug":  "2026-10-24-http-requests-in-al-httpclient-headers",
         "title":  "Calling an API from AL: what I wish someone had told me about HttpClient and headers",
-        "date":  "2026-10-25",
+        "date":  "2026-10-24",
         "type":  "solution",
         "tags":  [
                      "AL",

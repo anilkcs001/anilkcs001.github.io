@@ -33,12 +33,11 @@ window.SITE = {
   // Leave repoId / categoryId empty and visitors see "Ask by email" and LinkedIn buttons instead.
   // Get the values at https://giscus.app (see POSTING-GUIDE.md, section 8).
   comments: {
-    repo: '',        // e.g. 'yourusername/yourusername.github.io'
-    repoId: '',      // e.g. 'R_kgDO...'
-    category: 'Q&A',
-    categoryId: ''   // e.g. 'DIC_kwDO...'
-  },
-
+  repo: 'anilkcs001/anilkcs001.github.io',
+  repoId: 'R_paste_here',
+  category: 'Q&A',
+  categoryId: 'DIC_paste_here'
+},
   // ---------- About page ----------
 
   summary: [

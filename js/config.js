@@ -52,7 +52,7 @@ window.SITE = {
     { value: '3+',  label: 'years in Business Central' },
     { value: '50+', label: 'RDLC & Excel reports delivered' },
     { value: 'MB-820', label: 'Developer Associate certified' },
-    { value: '2',   label: 'major client projects' }
+    { value: '2',   label: 'end-to-end projects' }
   ],
 
   // Key technical highlights
@@ -63,7 +63,7 @@ window.SITE = {
     },
     {
       title: 'SharePoint DMS + secure banking',
-      text: 'Implemented SharePoint document management using Microsoft Graph API, and secure Bank Integration using AES/RSA encryption and decryption.'
+      text: 'Built document management with SharePoint and Microsoft Graph API, and secure bank integrations using AES/RSA encryption.'
     },
     {
       title: 'GST Rate Generator',
@@ -71,7 +71,7 @@ window.SITE = {
     },
     {
       title: 'AI Agent with Azure OpenAI',
-      text: 'Developed an AI Agent using Azure OpenAI and System.AI for invoice data extraction and item matching.'
+      text: 'Built AI-assisted document processing in Business Central using Azure OpenAI and the System.AI module.'
     }
   ],
 
@@ -90,25 +90,24 @@ window.SITE = {
       ],
       projects: [
         {
-          name: 'Education Sector',
+          name: 'Education Sector Implementation',
           duration: 'Current',
           bullets: [
-            'Customized Purchase and Finance processes: Purchase Requisitions, Buyer Assignment, CAPEX/OPEX Budgeting, utilization, approvals and procurement controls.',
-            'Customized Purchase Invoicing for capital purchases through Fixed Assets and consumables through expenses, based on procurement type.',
-            'Designed an Approval Workflow supporting multi-level, sequential, parallel, mandatory and minimum-group approval scenarios.',
-            'Integrated Dynamic Email Templates, Business Events and Power Automate / Teams to streamline approvals and notifications.',
-            'Implemented SharePoint DMS with a reusable FactBox for document upload, setup-driven folder mapping and document access from BC pages.',
-            'Delivered the AI Agent (Azure OpenAI / System.AI), Buyer Assignment Matrix, Dynamic No. Series, secure Bank Integration (AES/RSA) and GST Rate Generator.'
+            'Customized procurement and finance processes, including purchase requisitions, budgeting, approvals and procurement controls.',
+            'Designed a configurable multi-level approval workflow for different approval scenarios.',
+            'Automated notifications using email templates, Business Events and Power Automate.',
+            'Built document management with SharePoint, accessible directly from Business Central pages.',
+            'Delivered reusable components such as configurable number series, secure bank integration and India GST setup automation.'
           ]
         },
         {
-          name: 'Tea Industry',
+          name: 'Manufacturing Sector Implementation',
           duration: '16 months',
           bullets: [
-            'Converted Tea Industry requirements into AL customizations across Sales, Purchase and Finance processes.',
-            'Developed 50+ complex RDLC and Excel reports covering MIS, operational, financial and year-end reporting across Tea Manufacturing, Sorting, Payroll and Warehouse.',
-            'Automated Tea Board sales processing through Excel upload, Sales Invoice creation and settlement and distribution across warehouses, brokers and Tea Board transactions.',
-            'Customized Purchase Invoice, warehouse and posting processes, and extended Business Central dimensions from 8 to 13 for richer financial and operational analysis.'
+            'Translated business requirements into AL customizations across Sales, Purchase and Finance.',
+            'Developed 50+ RDLC and Excel reports for MIS, operational, financial and year-end reporting.',
+            'Automated sales processing through Excel upload, from invoice creation to settlement.',
+            'Customized purchase, warehouse and posting processes, and extended dimensions for richer financial analysis.'
           ]
         }
       ]

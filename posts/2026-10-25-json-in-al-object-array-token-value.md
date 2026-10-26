@@ -6,7 +6,7 @@ tags: AL, JSON, JsonObject, Integration, Business Central
 summary: Four JSON types with confusing names. Once I pictured them as a cupboard, boxes and a parcel, reading JSON in AL became easy. Let's read a real order together, step by step, and write one back.
 ---
 
-In my [last post](#/post/2026-10-25-http-requests-in-al-httpclient-headers) we called an API and got some text back. Nice. But that text is JSON, and now we have to actually read it: the order number, the customer name, every single line.
+In my [last post](#/post/2026-10-24-http-requests-in-al-httpclient-headers) we called an API and got some text back. Nice. But that text is JSON, and now we have to actually read it: the order number, the customer name, every single line.
 
 And this is where AL gives you four types with very similar names: `JsonObject`, `JsonArray`, `JsonToken` and `JsonValue`. I remember looking at them and thinking, why four? Which one do I use when?
 

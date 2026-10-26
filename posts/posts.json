@@ -1,100 +1,189 @@
 [
-  {
-    "slug": "2026-10-15-amount-in-words-rdlc-report",
-    "title": "Amount in words in RDLC reports (Lakh and Crore, any currency)",
-    "date": "2026-10-15",
-    "type": "solution",
-    "tags": [
-      "RDLC",
-      "Reports",
-      "Amount in Words",
-      "India"
-    ],
-    "summary": "Paste one block of VB code into your RDLC report and print any amount in words, in lakhs and crores, for INR and 15 other currencies.",
-    "readingTime": 6
-  },
-   {
-    "slug": "2026-10-16-commit-every-100-records",
-    "title": "Commit every 100 records in AL with mod",
-    "date": "2026-10-16",
-    "type": "snippet",
-    "tags": [
-      "AL",
-      "Performance",
-      "Business Central"
-    ],
-    "summary": "A tiny pattern for long-running batch jobs so one failure doesn't roll back hours of work.",
-    "readingTime": 1
-  },
-   {
-    "slug": "2026-10-17-exit-vs-currreport-skip",
-    "title": "Why `exit` doesn't skip a record in a report",
-    "date": "2026-10-17",
-    "type": "issue",
-    "tags": [
-      "AL",
-      "Reports"
-    ],
-    "summary": "Calling exit in OnAfterGetRecord leaves the trigger but the row is still printed. Use CurrReport.Skip().",
-    "readingTime": 1
-  },
-
-  {
-    "slug": "2026-10-18-permission-set-for-every-extension",
-    "title": "Ship a PermissionSet object with every extension",
-    "date": "2026-10-18",
-    "type": "solution",
-    "tags": [
-      "AL",
-      "Permissions",
-      "PTE"
-    ],
-    "summary": "A complete starter permission set so users can be assigned access the moment your extension is installed.",
-    "readingTime": 1
-  },
- 
- 
     {
-    "slug": "2026-10-19-n-plus-1-query-in-al",
-    "title": "N+1 queries in AL: why a simple loop makes Business Central slow, and how to fix it",
-    "date": "2026-10-19",
-    "type": "issue",
-    "tags": [
-      "AL",
-      "Performance",
-      "N+1 Query",
-      "Reports",
-      "Business Central"
-    ],
-    "summary": "A loop that looks harmless can send thousands of extra SQL statements. Learn to spot the N+1 pattern in AL, measure it, and fix it four ways.",
-    "readingTime": 8
-  },
-    {"slug":"2026-10-19-isolated-storage-secrets-masked",
-    "title":"Stop storing API keys in a Business Central field: use Isolated Storage and a masked field",
-    "date":"2026-10-19",
-    "type":"solution",
-    "tags":["AL",
-    "Security",
-    "Isolated Storage",
-    "SecretText",
-    "Business Central"],
-    "summary":"Keep API keys and passwords out of your setup table. Store them encrypted in Isolated Storage, show them masked on the page, and read them back as SecretText.","readingTime":7
-  },
-  {
-  "slug":"2026-10-19-json-viewer-colour-html-page",
-  "title":"Show request and response JSON in colour on a Business Central page (WebPageViewer)",
-  "date":"2026-10-19",
-  "type":"solution",
-  "tags":["AL",
-  "JSON",
-  "WebPageViewer",
-  "Integration",
-  "Business Central"],
-  "summary":"Build a log page that shows the request and response JSON side by side, indented and colour-coded like a code editor, using the built-in WebPageViewer and a small recursive procedure.",
-  "readingTime":11
-},
-{"slug":"2026-10-20-singleinstance-vs-bindsubscription","title":"SingleInstance vs BindSubscription: run an event subscriber only when you want it","date":"2026-10-20","type":"solution","tags":["AL","Events","BindSubscription","SingleInstance","Business Central"],"summary":"Need a subscriber to run only during your own process, not every time a user works? See why a SingleInstance flag is risky, and how BindSubscription solves it cleanly.","readingTime":6},
-{"slug":"2026-10-20-encryption-basics-hashing-aes-rsa","title":"Encryption explained like a story: hashing, AES, RSA, keys, IV and chaining (Part 1)","date":"2026-10-21","type":"snippet","tags":["Security","Encryption","Hashing","AES","RSA"],"summary":"No coding knowledge needed. Locked boxes, fingerprints, padlocks and suitcases explain hashing, AES, RSA, public and private keys, IV and chaining in plain words.","readingTime":9},
-{"slug":"2026-10-22-merge-pdfs-in-business-central-pure-al","title":"Merge PDFs in Business Central with pure AL (no ControlAddIn, no Azure), and one problem I need your help with","date":"2026-10-22","type":"solution","tags":["AL","PDF","Reports","OnPreRendering","Business Central"],"summary":"Upload any number of PDFs on a page and download them as one merged file, using only AL and the report OnPreRendering trigger. It works, but the result starts with one blank page. What I tried, and a request for your ideas.","readingTime":11},
-{"slug":"2026-10-23-cbc-and-iv-questions-answered","title":"How CBC and the IV really work: 10 questions everyone asks, answered with one real example","date":"2026-10-23","type":"snippet","tags":["Security","Encryption","AES","CBC","IV"],"summary":"Why is the message cut into pieces? Doesn't mixing 16 + 16 bytes give 32? Where does the IV go, and how does the receiver decrypt? One real AES example, followed step by step.","readingTime":8}
+        "slug":  "2026-10-15-amount-in-words-rdlc-report",
+        "title":  "Amount in words in RDLC reports (Lakh and Crore, any currency)",
+        "date":  "2026-10-15",
+        "type":  "solution",
+        "tags":  [
+                     "RDLC",
+                     "Reports",
+                     "Amount in Words",
+                     "India"
+                 ],
+        "summary":  "Paste one block of VB code into your RDLC report and print any amount in words, in lakhs and crores, for INR and 15 other currencies.",
+        "readingTime":  6
+    },
+    {
+        "slug":  "2026-10-16-commit-every-100-records",
+        "title":  "Commit every 100 records in AL with mod",
+        "date":  "2026-10-16",
+        "type":  "snippet",
+        "tags":  [
+                     "AL",
+                     "Performance",
+                     "Business Central"
+                 ],
+        "summary":  "A tiny pattern for long-running batch jobs so one failure doesn\u0027t roll back hours of work.",
+        "readingTime":  1
+    },
+    {
+        "slug":  "2026-10-17-exit-vs-currreport-skip",
+        "title":  "Why `exit` doesn\u0027t skip a record in a report",
+        "date":  "2026-10-17",
+        "type":  "issue",
+        "tags":  [
+                     "AL",
+                     "Reports"
+                 ],
+        "summary":  "Calling exit in OnAfterGetRecord leaves the trigger but the row is still printed. Use CurrReport.Skip().",
+        "readingTime":  1
+    },
+    {
+        "slug":  "2026-10-18-permission-set-for-every-extension",
+        "title":  "Ship a PermissionSet object with every extension",
+        "date":  "2026-10-18",
+        "type":  "solution",
+        "tags":  [
+                     "AL",
+                     "Permissions",
+                     "PTE"
+                 ],
+        "summary":  "A complete starter permission set so users can be assigned access the moment your extension is installed.",
+        "readingTime":  1
+    },
+    {
+        "slug":  "2026-10-19-n-plus-1-query-in-al",
+        "title":  "N+1 queries in AL: why a simple loop makes Business Central slow, and how to fix it",
+        "date":  "2026-10-19",
+        "type":  "issue",
+        "tags":  [
+                     "AL",
+                     "Performance",
+                     "N+1 Query",
+                     "Reports",
+                     "Business Central"
+                 ],
+        "summary":  "A loop that looks harmless can send thousands of extra SQL statements. Learn to spot the N+1 pattern in AL, measure it, and fix it four ways.",
+        "readingTime":  8
+    },
+    {
+        "slug":  "2026-10-19-isolated-storage-secrets-masked",
+        "title":  "Stop storing API keys in a Business Central field: use Isolated Storage and a masked field",
+        "date":  "2026-10-19",
+        "type":  "solution",
+        "tags":  [
+                     "AL",
+                     "Security",
+                     "Isolated Storage",
+                     "SecretText",
+                     "Business Central"
+                 ],
+        "summary":  "Keep API keys and passwords out of your setup table. Store them encrypted in Isolated Storage, show them masked on the page, and read them back as SecretText.",
+        "readingTime":  7
+    },
+    {
+        "slug":  "2026-10-19-json-viewer-colour-html-page",
+        "title":  "Show request and response JSON in colour on a Business Central page (WebPageViewer)",
+        "date":  "2026-10-19",
+        "type":  "solution",
+        "tags":  [
+                     "AL",
+                     "JSON",
+                     "WebPageViewer",
+                     "Integration",
+                     "Business Central"
+                 ],
+        "summary":  "Build a log page that shows the request and response JSON side by side, indented and colour-coded like a code editor, using the built-in WebPageViewer and a small recursive procedure.",
+        "readingTime":  11
+    },
+    {
+        "slug":  "2026-10-20-singleinstance-vs-bindsubscription",
+        "title":  "SingleInstance vs BindSubscription: run an event subscriber only when you want it",
+        "date":  "2026-10-20",
+        "type":  "solution",
+        "tags":  [
+                     "AL",
+                     "Events",
+                     "BindSubscription",
+                     "SingleInstance",
+                     "Business Central"
+                 ],
+        "summary":  "Need a subscriber to run only during your own process, not every time a user works? See why a SingleInstance flag is risky, and how BindSubscription solves it cleanly.",
+        "readingTime":  6
+    },
+    {
+        "slug":  "2026-10-20-encryption-basics-hashing-aes-rsa",
+        "title":  "Encryption explained like a story: hashing, AES, RSA, keys, IV and chaining (Part 1)",
+        "date":  "2026-10-21",
+        "type":  "snippet",
+        "tags":  [
+                     "Security",
+                     "Encryption",
+                     "Hashing",
+                     "AES",
+                     "RSA"
+                 ],
+        "summary":  "No coding knowledge needed. Locked boxes, fingerprints, padlocks and suitcases explain hashing, AES, RSA, public and private keys, IV and chaining in plain words.",
+        "readingTime":  9
+    },
+    {
+        "slug":  "2026-10-22-merge-pdfs-in-business-central-pure-al",
+        "title":  "Merge PDFs in Business Central with pure AL (no ControlAddIn, no Azure), and one problem I need your help with",
+        "date":  "2026-10-22",
+        "type":  "solution",
+        "tags":  [
+                     "AL",
+                     "PDF",
+                     "Reports",
+                     "OnPreRendering",
+                     "Business Central"
+                 ],
+        "summary":  "Upload any number of PDFs on a page and download them as one merged file, using only AL and the report OnPreRendering trigger. It works, but the result starts with one blank page. What I tried, and a request for your ideas.",
+        "readingTime":  11
+    },
+    {
+        "slug":  "2026-10-23-cbc-and-iv-questions-answered",
+        "title":  "How CBC and the IV really work: 10 questions everyone asks, answered with one real example",
+        "date":  "2026-10-23",
+        "type":  "snippet",
+        "tags":  [
+                     "Security",
+                     "Encryption",
+                     "AES",
+                     "CBC",
+                     "IV"
+                 ],
+        "summary":  "Why is the message cut into pieces? Doesn\u0027t mixing 16 + 16 bytes give 32? Where does the IV go, and how does the receiver decrypt? One real AES example, followed step by step.",
+        "readingTime":  8
+    },
+    {
+        "slug":  "2026-10-24-http-requests-in-al-httpclient-headers",
+        "title":  "Calling an API from AL: what I wish someone had told me about HttpClient and headers",
+        "date":  "2026-10-25",
+        "type":  "solution",
+        "tags":  [
+                     "AL",
+                     "API",
+                     "HttpClient",
+                     "Integration",
+                     "Business Central"
+                 ],
+        "summary":  "Request, response, headers, content... When I started with integrations, these words confused me more than the code. Here is how I understand them now, with GET, POST and PATCH examples in AL you can try today.",
+        "readingTime":  9
+    },
+    {
+        "slug": "2026-10-25-json-in-al-object-array-token-value",
+        "title": "JsonObject, JsonArray, JsonToken, JsonValue: how I finally understood JSON in AL",
+        "date": "2026-10-25",
+        "type": "solution",
+        "tags": [
+            "AL",
+            "JSON",
+            "JsonObject",
+            "Integration",
+            "Business Central"
+        ],
+        "summary": "Four JSON types with confusing names. Once I pictured them as a cupboard, boxes and a parcel, reading JSON in AL became easy. Let's read a real order together, step by step, and write one back.",
+        "readingTime": 10
+    }
 ]

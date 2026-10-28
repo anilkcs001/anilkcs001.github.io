@@ -200,5 +200,20 @@
         ],
         "summary": "From Business Central version 29, your table extension fields sit in the same SQL table as the base table. What changed, why it matters for keys, the story of how we got here, and 12 \"Did you know?\" facts on keys, Blobs and SetLoadFields, each explained simply.",
         "readingTime": 11
+    },
+    {
+        "slug": "2026-10-27-page-background-task-purchase-gst-totals",
+        "title": "Show purchase totals and GST without slowing down the page: Page Background Tasks in AL",
+        "date": "2026-10-27",
+        "type": "solution",
+        "tags": [
+            "AL",
+            "Performance",
+            "Page Background Task",
+            "Purchase",
+            "Business Central"
+        ],
+        "summary": "Users wanted to see line totals and GST on the Purchase Order itself, but calculating them made the page slow. Page Background Tasks let the page open at once and fill the totals a moment later. Here is how it works, step by step.",
+        "readingTime": 9
     }
 ]

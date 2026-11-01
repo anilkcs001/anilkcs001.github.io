@@ -6,7 +6,7 @@ tags: AL, Locking, LockTable, Performance, Business Central
 summary: Using the same IT budget example as part 1, let's see what a lock is, how long it lives, and why LockTable doesn't lock the whole table the moment you call it. Part 2 of a short series on locking.
 ---
 
-*Part 2 of a short series on locking. In [part 1](#/post/2026-10-31-readisolation-in-al-explained-simply) we looked at ReadIsolation with Ravi, Priya and the IT budget. We'll use the same example here.*
+*Part 2 of a short series on locking. In [part 1](#/post/2026-10-29-readisolation-in-al-explained-simply) we looked at ReadIsolation with Ravi, Priya and the IT budget. We'll use the same example here.*
 
 ---
 

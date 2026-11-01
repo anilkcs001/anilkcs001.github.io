@@ -231,5 +231,20 @@
         ],
         "summary": "Your code or API creates journal lines, and posting stops with \"out of balance by 200\". Here is how Business Central checks the balance, the seven usual causes, a small AL tool that points to the exact document, and how to build journal lines that always balance.",
         "readingTime": 17
+    },
+    {
+        "slug": "2026-10-29-readisolation-in-al-explained-simply",
+        "title": "ReadIsolation in AL, explained with one simple example",
+        "date": "2026-10-29",
+        "type": "feature",
+        "tags": [
+            "AL",
+            "ReadIsolation",
+            "Locking",
+            "Performance",
+            "Business Central"
+        ],
+        "summary": "Forget the definitions. Let's take one budget line, two users and one moment in time, and replay it once for each ReadIsolation level. By the end you'll know exactly what each level does and when to use it. Part 1 of a short series on locking.",
+        "readingTime": 7
     }
 ]

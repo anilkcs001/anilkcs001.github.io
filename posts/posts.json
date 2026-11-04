@@ -276,5 +276,34 @@
         ],
         "summary": "For a long time I thought Commit() meant \"save\". It doesn't, and that misunderstanding can quietly break your data. Here's what I learned about Commit, the hidden commit in Codeunit.Run, and how CommitBehavior protects your code from other people's commits. Part 3 of a short series on locking.",
         "readingTime": 8
+    },
+    {
+        "slug": "2026-11-02-no-series-peeknextno-vs-getnextno",
+        "title": "No. Series in AL, simply explained: GetNextNo, PeekNextNo, and how to number a new document",
+        "date": "2026-11-02",
+        "type": "feature",
+        "tags": [
+            "AL",
+            "No. Series",
+            "Business Central",
+            "Basics"
+        ],
+        "summary": "GetNextNo takes a number. PeekNextNo only looks at it. That one difference decides whether your documents get clean numbers or duplicates. Here's how No. Series works, how to give a number to a new record the way Business Central does, when PeekNextNo is the right choice, and when to use the batch version.",
+        "readingTime": 10
+    },
+    {
+        "slug": "2026-11-03-apply-payment-to-invoice-in-al-code",
+        "title": "How to apply a payment to an invoice from AL code (3 simple ways)",
+        "date": "2026-11-03",
+        "type": "solution",
+        "tags": [
+            "AL",
+            "Payables",
+            "Vendor Ledger Entry",
+            "Application",
+            "Business Central"
+        ],
+        "summary": "A user can apply a payment to an invoice in two clicks. Doing the same from AL code is not so obvious. Here are three simple ways to do it, with code, and the small mistakes to avoid. I learned this by reading blogs and the Business Central base app code.",
+        "readingTime": 10
     }
 ]

@@ -29,7 +29,7 @@ In Business Central India, a GST rate isn't stored per item. It's stored for a *
 
 > **GST Group + HSN/SAC + From State + Location State + Date**
 
-(I explained this in [GST in Business Central: the 5 questions BC asks on every line](#/post/2026-11-06-gst-in-business-central-five-questions). Tax Rates answer question 4, *"How much?"*)
+<!-- (I explained this in [GST in Business Central: the 5 questions BC asks on every line](#/post/2026-11-06-gst-in-business-central-five-questions). Tax Rates answer question 4, *"How much?"*) -->
 
 So one HSN code needs a separate line for **every pair of states** that can trade with each other. Let's count:
 

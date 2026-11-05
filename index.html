@@ -20,6 +20,10 @@
       document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
       var pal = localStorage.getItem('palette');
       if (pal && pal !== 'aurora') document.documentElement.setAttribute('data-palette', pal);
+      // Reader text size / width, applied before the page draws
+      var rs = parseFloat(localStorage.getItem('readScale'));
+      if (rs >= 0.8 && rs <= 1.6) document.documentElement.style.setProperty('--read-scale', rs);
+      if (localStorage.getItem('readWide') === '1') document.documentElement.setAttribute('data-read-wide', '1');
     } catch (e) {}
   </script>
 </head>

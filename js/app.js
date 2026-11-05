@@ -161,6 +161,8 @@
       if (frame) frame.contentWindow.postMessage({ giscus: { setConfig: { theme: next } } }, 'https://giscus.app');
     });
 
+    setupReaderBar();
+
     // Reading progress bar (shown on posts)
     const bar = document.createElement('div');
     bar.className = 'progress';
@@ -170,6 +172,88 @@
       const h = document.documentElement;
       const max = h.scrollHeight - h.clientHeight;
       bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+    }, { passive: true });
+  }
+
+  /* ---------- Reader controls (text size, width, pinch) ----------
+     Browser pinch zoom only magnifies the page, so lines run off the
+     screen. These controls change CSS variables instead, so the text
+     gets bigger or smaller and the lines wrap again to fit. */
+  const READ_MIN = 0.8, READ_MAX = 1.6, READ_STEP = 0.1;
+
+  function setupReaderBar() {
+    const root = document.documentElement;
+    let scale = 1;
+    try { scale = parseFloat(localStorage.getItem('readScale')) || 1; } catch (e) {}
+
+    const bar = document.createElement('div');
+    bar.className = 'reader-bar';
+    bar.setAttribute('role', 'toolbar');
+    bar.setAttribute('aria-label', 'Reading options');
+    bar.innerHTML =
+      '<button class="rb-small" data-act="down" aria-label="Smaller text" title="Smaller text">A−</button>' +
+      '<button class="rb-size" data-act="reset" aria-label="Reset text size" title="Reset text size">100%</button>' +
+      '<button class="rb-big" data-act="up" aria-label="Bigger text" title="Bigger text">A+</button>' +
+      '<span class="rb-sep" aria-hidden="true"></span>' +
+      '<button class="rb-width" data-act="wide" aria-label="Wide reading column" title="Wide / normal column" aria-pressed="false">↔</button>';
+    document.body.appendChild(bar);
+    const sizeBtn = bar.querySelector('.rb-size');
+    const wideBtn = bar.querySelector('.rb-width');
+
+    function applyScale(v, save) {
+      scale = Math.min(READ_MAX, Math.max(READ_MIN, Math.round(v * 100) / 100));
+      root.style.setProperty('--read-scale', scale);
+      sizeBtn.textContent = Math.round(scale * 100) + '%';
+      if (save) { try { localStorage.setItem('readScale', String(scale)); } catch (e) {} }
+    }
+    function setScaleKeepPlace(v) {
+      // Keep the reader at the same point in the article while it reflows
+      const h = document.documentElement;
+      const ratio = h.scrollHeight > 0 ? h.scrollTop / h.scrollHeight : 0;
+      applyScale(v, true);
+      h.scrollTop = ratio * h.scrollHeight;
+    }
+    function applyWide(on, save) {
+      if (on) root.setAttribute('data-read-wide', '1'); else root.removeAttribute('data-read-wide');
+      wideBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      if (save) { try { localStorage.setItem('readWide', on ? '1' : '0'); } catch (e) {} }
+    }
+
+    applyScale(scale, false);
+    let wide = false;
+    try { wide = localStorage.getItem('readWide') === '1'; } catch (e) {}
+    applyWide(wide, false);
+
+    bar.addEventListener('click', (e) => {
+      const b = e.target.closest('button'); if (!b) return;
+      const act = b.dataset.act;
+      if (act === 'up') setScaleKeepPlace(scale + READ_STEP);
+      else if (act === 'down') setScaleKeepPlace(scale - READ_STEP);
+      else if (act === 'reset') setScaleKeepPlace(1);
+      else if (act === 'wide') applyWide(!root.hasAttribute('data-read-wide'), true);
+    });
+
+    // Two-finger pinch on the article changes the text size (and reflows).
+    // Outside the article, normal browser zoom still works.
+    let startDist = 0, startScale = 1, pending = null;
+    const dist = (t) => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+    document.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 2 && e.target.closest && e.target.closest('body.reading .article-shell')) {
+        startDist = dist(e.touches); startScale = scale;
+      }
+    }, { passive: true });
+    document.addEventListener('touchmove', (e) => {
+      if (!startDist || e.touches.length !== 2) return;
+      e.preventDefault();
+      const next = startScale * (dist(e.touches) / startDist);
+      if (pending) cancelAnimationFrame(pending);
+      pending = requestAnimationFrame(() => applyScale(next, false));
+    }, { passive: false });
+    document.addEventListener('touchend', (e) => {
+      if (startDist && e.touches.length < 2) {
+        startDist = 0;
+        try { localStorage.setItem('readScale', String(scale)); } catch (err) {}
+      }
     }, { passive: true });
   }
 

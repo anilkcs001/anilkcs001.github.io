@@ -18,6 +18,8 @@
     try {
       var t = localStorage.getItem('theme');
       document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+      var pal = localStorage.getItem('palette');
+      if (pal && pal !== 'aurora') document.documentElement.setAttribute('data-palette', pal);
     } catch (e) {}
   </script>
 </head>
@@ -39,6 +41,12 @@
         <nav class="nav">
           <a href="#/" data-nav="home">Posts</a>
           <a href="#/about" data-nav="about">About</a>
+          <div class="palette-wrap">
+            <button id="palette-toggle" class="icon-btn" aria-label="Choose a colour theme" aria-haspopup="true" aria-expanded="false" title="Colour theme">
+              <span class="palette-dot"></span>
+            </button>
+            <div class="palette-pop glass" id="palette-pop" role="menu" hidden></div>
+          </div>
           <button id="theme-toggle" class="icon-btn" aria-label="Switch between dark and light theme" title="Switch theme">
             <span class="i-sun">☀</span><span class="i-moon">☾</span>
           </button>

@@ -80,10 +80,69 @@
     });
   }
 
+  /* ---------- Colour theme picker ---------- */
+
+  const PALETTES = [
+    { id: 'aurora',   name: 'Aurora',   sw: 'linear-gradient(135deg, #a78bfa, #60a5fa, #5eead4)' },
+    { id: 'ocean',    name: 'Ocean',    sw: 'linear-gradient(135deg, #3b82f6, #0ea5e9, #22d3ee)' },
+    { id: 'neon',     name: 'Neon',     sw: 'linear-gradient(135deg, #f0abfc, #ec4899, #22d3ee)' },
+    { id: 'sunset',   name: 'Sunset',   sw: 'linear-gradient(135deg, #fbbf24, #fb7185, #c084fc)' },
+    { id: 'graphite', name: 'Graphite', sw: 'linear-gradient(135deg, #e4e4e7, #71717a, #bef264)' },
+    { id: 'emerald',  name: 'Emerald',  sw: 'linear-gradient(135deg, #6ee7b7, #10b981, #fcd34d)' }
+  ];
+
+  const currentPalette = () => document.documentElement.getAttribute('data-palette') || 'aurora';
+
+  function applyPalette(id) {
+    const root = document.documentElement;
+    if (id === 'aurora') root.removeAttribute('data-palette');
+    else root.setAttribute('data-palette', id);
+    try { localStorage.setItem('palette', id); } catch (e) {}
+  }
+
+  function setupPalettePicker() {
+    const btn = document.getElementById('palette-toggle');
+    const pop = document.getElementById('palette-pop');
+    if (!btn || !pop) return;
+
+    // The site owner can set a default in config.js; a visitor's own choice wins
+    let saved = null;
+    try { saved = localStorage.getItem('palette'); } catch (e) {}
+    if (!saved && S.palette && S.palette !== 'aurora') document.documentElement.setAttribute('data-palette', S.palette);
+
+    pop.innerHTML =
+      '<div class="palette-title">Colour theme</div>' +
+      PALETTES.map((p) =>
+        `<button type="button" class="palette-opt" role="menuitemradio" data-pal="${p.id}">
+           <span class="sw" style="background:${p.sw}"></span>${esc(p.name)}
+         </button>`).join('');
+
+    const sync = () => pop.querySelectorAll('.palette-opt').forEach((o) => {
+      const on = o.dataset.pal === currentPalette();
+      o.classList.toggle('on', on);
+      o.setAttribute('aria-checked', on ? 'true' : 'false');
+    });
+    const open = (yes) => {
+      pop.hidden = !yes;
+      btn.setAttribute('aria-expanded', yes ? 'true' : 'false');
+      if (yes) sync();
+    };
+
+    btn.addEventListener('click', (e) => { e.stopPropagation(); open(pop.hidden); });
+    pop.addEventListener('click', (e) => {
+      const o = e.target.closest('.palette-opt');
+      if (!o) return;
+      applyPalette(o.dataset.pal);
+      sync();
+    });
+    document.addEventListener('click', (e) => { if (!pop.hidden && !pop.contains(e.target)) open(false); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') open(false); });
+  }
+
   /* ---------- Shell (header / footer / theme) ---------- */
 
   function setupShell() {
-    if (S.palette && S.palette !== 'aurora') document.documentElement.setAttribute('data-palette', S.palette);
+    setupPalettePicker();
     document.getElementById('brand').textContent = S.name;
     document.getElementById('brand-mark').textContent = initials(S.name);
     const links = (S.links || []).map((l) => extLink(l, '')).join(' · ');
@@ -138,6 +197,7 @@
     return `
       <a class="card" href="#/post/${encodeURIComponent(p.slug)}">
         <div class="meta">${badge(p.type)}<span>${fmtDate(p.date)}</span><span>${p.readingTime} min read</span></div>
+        <span class="latest-label">Latest</span>
         <span class="arrow" aria-hidden="true">↗</span>
         <h2>${esc(p.title)}</h2>
         <p>${esc(p.summary)}</p>
@@ -161,20 +221,18 @@
     app.innerHTML = `
       <section class="hero">
         <div class="hero-panel">
-          <div class="hero-top">
-            <div class="avatar">${S.photo
-              ? `<img src="${esc(S.photo)}" alt="${esc(S.name)}">`
-              : `<span>${esc(initials(S.name))}</span>`}</div>
-            <div>
-              <span class="status">Writing about Business Central</span>
-              <div class="eyebrow">${esc(S.role)} · ${esc(S.location)}</div>
+          <div class="avatar">${S.photo
+            ? `<img src="${esc(S.photo)}" alt="${esc(S.name)}">`
+            : `<span>${esc(initials(S.name))}</span>`}</div>
+          <div class="hero-main">
+            <span class="status">Writing about Business Central</span>
+            <div class="eyebrow">${esc(S.role)} · ${esc(S.location)}</div>
+            <h1><span class="grad-text">${esc(S.name)}</span></h1>
+            <p class="lead">${esc(S.intro)}</p>
+            <div class="link-row">
+              ${state.posts[0] ? `<a class="pill-link primary" href="#/post/${encodeURIComponent(state.posts[0].slug)}">Read the latest post →</a>` : ''}
+              <a class="pill-link" href="#/about">About me</a>${links}
             </div>
-          </div>
-          <h1><span class="grad-text">${esc(S.name)}</span></h1>
-          <p class="lead">${esc(S.intro)}</p>
-          <div class="link-row">
-            ${state.posts[0] ? `<a class="pill-link primary" href="#/post/${encodeURIComponent(state.posts[0].slug)}">Read the latest post →</a>` : ''}
-            <a class="pill-link" href="#/about">About me</a>${links}
           </div>
           <div class="stats">
             <div><b>${state.posts.length}</b>posts</div>
@@ -441,6 +499,9 @@
     app.innerHTML = `
       <section class="about">
         <div class="about-panel">
+          <div class="avatar about-avatar">${S.photo
+            ? `<img src="${esc(S.photo)}" alt="${esc(S.name)}">`
+            : `<span>${esc(initials(S.name))}</span>`}</div>
           <div class="eyebrow-line">${esc(S.role)} · ${esc(S.location)}</div>
           <h1><span class="grad-text">${esc(S.name)}</span></h1>
           <div class="prose">${summary}</div>
@@ -475,6 +536,8 @@
     routeToken++;
     const parts = location.hash.replace(/^#\/?/, '').split('/');
     const page = parts[0] || '';
+    // Calm "reading mode" on post pages
+    document.body.classList.toggle('reading', page === 'post');
     if (page === '') return renderHome();
     if (page === 'about') return renderAbout();
     if (page === 'post' && parts[1]) return renderPost(decodeURIComponent(parts[1]));

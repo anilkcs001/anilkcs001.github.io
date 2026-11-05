@@ -80,3 +80,23 @@ Code blocks tagged `al` are coloured using the Delphi/Pascal grammar, the closes
 | 2026-10-19 | "Follow along" box (email subscribe form, RSS feed, LinkedIn/GitHub follow buttons) and automatic `feed.xml` generation |
 | 2026-10-19 | Questions section under every post: giscus (GitHub Discussions) when configured in `config.js`, email / LinkedIn buttons otherwise |
 | 2026-10-19 | About page rebuilt from resume: summary, stats, key highlights, experience timeline with client projects, grouped skills, certifications, education, Save as PDF |
+
+
+
+
+{
+        "slug": "2026-11-04-generate-gst-tax-rates-automatically",
+        "title": "I stopped filling GST rates in Excel: generating thousands of GST tax rates in Business Central automatically",
+        "date": "2026-11-04",
+        "type": "solution",
+        "tags": [
+            "GST",
+            "India",
+            "Tax Engine",
+            "AL",
+            "Automation",
+            "Business Central"
+        ],
+        "summary": "One HSN code can need over 100 GST rate lines in Business Central, and a company has hundreds of HSN codes. Instead of exporting to Excel, filling rows and importing back, I built a generator that creates every rate from data BC already has. Here's why I built it, how it works, why the duplicate check matters so much, and how you can build your own.",
+        "readingTime": 16
+    }

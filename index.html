@@ -1,32 +1,49 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Anil Kumar Paidimukkala · Blog</title>
-  <meta name="description" content="Dynamics 365 Business Central Technical Consultant. Daily notes on issues, new features, AL code bits and full solutions.">
+  <meta name="description" content="Dynamics 365 Business Central Technical Consultant. Notes on real issues, new features, AL code bits and full solutions.">
+  <meta name="theme-color" content="#07060d">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
   <link rel="alternate" type="application/rss+xml" title="RSS feed" href="feed.xml">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/palettes.css">
   <script>
+    // Dark is the default. A saved choice (from the toggle) wins.
     try {
       var t = localStorage.getItem('theme');
-      if (t) document.documentElement.setAttribute('data-theme', t);
+      document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
     } catch (e) {}
   </script>
 </head>
 <body>
+  <div class="aurora" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+    <span class="grid-overlay"></span>
+  </div>
+
   <header class="site-header">
-    <div class="wrap bar">
-      <a class="brand" href="#/" id="brand">Anil Kumar Paidimukkala</a>
-      <nav class="nav">
-        <a href="#/" data-nav="home">Posts</a>
-        <a href="#/about" data-nav="about">About</a>
-        <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark / light theme" title="Toggle theme">◐</button>
-      </nav>
+    <div class="wrap">
+      <div class="bar glass">
+        <a class="brand" href="#/" id="brand-link">
+          <span class="brand-mark" id="brand-mark">AK</span>
+          <span id="brand">Anil Kumar Paidimukkala</span>
+        </a>
+        <nav class="nav">
+          <a href="#/" data-nav="home">Posts</a>
+          <a href="#/about" data-nav="about">About</a>
+          <button id="theme-toggle" class="icon-btn" aria-label="Switch between dark and light theme" title="Switch theme">
+            <span class="i-sun">☀</span><span class="i-moon">☾</span>
+          </button>
+        </nav>
+      </div>
     </div>
   </header>
 

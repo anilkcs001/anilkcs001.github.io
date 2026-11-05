@@ -33,23 +33,85 @@
     return `<span class="badge ${x.cls}">${esc(x.label)}</span>`;
   };
 
+  const isDark = () => document.documentElement.getAttribute('data-theme') !== 'light';
+
+  const initials = (name) =>
+    String(name || '').split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('');
+
+  const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Fade cards in as they scroll into view, and tilt them in 3D under the mouse
+  let observer = null;
+  function enhanceUI(root) {
+    // Only small blocks fade in. Long blocks (the article itself) are always visible.
+    const items = root.querySelectorAll('.card, .stat, .hl-card, .project, .follow, .ask, .pager a, .hero-panel, .about-panel');
+    if (!reduceMotion() && 'IntersectionObserver' in window) {
+      if (observer) observer.disconnect();
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) { en.target.classList.add('in'); observer.unobserve(en.target); }
+        });
+      }, { rootMargin: '0px 0px -30px 0px', threshold: 0 });
+      items.forEach((el, i) => {
+        el.classList.add('reveal');
+        el.style.transitionDelay = Math.min(i, 6) * 40 + 'ms';
+        observer.observe(el);
+      });
+      // Safety net: never leave anything hidden
+      setTimeout(() => items.forEach((el) => el.classList.add('in')), 2500);
+    }
+
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!fine || reduceMotion()) return;
+    root.querySelectorAll('.card, .stat, .hl-card, .project, .pager a').forEach((el) => {
+      el.classList.add('tilt');
+      const max = el.classList.contains('card') ? 5 : 7;
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width;
+        const y = (e.clientY - r.top) / r.height;
+        el.style.transitionDelay = '0ms';
+        el.style.transform =
+          `perspective(900px) rotateX(${(0.5 - y) * max}deg) rotateY(${(x - 0.5) * max}deg) translateY(-3px)`;
+        el.style.setProperty('--mx', x * 100 + '%');
+        el.style.setProperty('--my', y * 100 + '%');
+      });
+      el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+    });
+  }
+
   /* ---------- Shell (header / footer / theme) ---------- */
 
   function setupShell() {
+    if (S.palette && S.palette !== 'aurora') document.documentElement.setAttribute('data-palette', S.palette);
     document.getElementById('brand').textContent = S.name;
+    document.getElementById('brand-mark').textContent = initials(S.name);
     const links = (S.links || []).map((l) => extLink(l, '')).join(' · ');
     document.getElementById('footer').innerHTML =
       `<span>© ${new Date().getFullYear()} ${esc(S.name)}</span><span>${links}</span>`;
 
     document.getElementById('theme-toggle').addEventListener('click', () => {
       const root = document.documentElement;
-      const dark = root.getAttribute('data-theme')
-        ? root.getAttribute('data-theme') === 'dark'
-        : window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const next = dark ? 'light' : 'dark';
+      const next = isDark() ? 'light' : 'dark';
       root.setAttribute('data-theme', next);
       try { localStorage.setItem('theme', next); } catch (e) {}
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', next === 'dark' ? '#07060d' : '#f6f4fb');
+      // Keep the comments box in the same theme
+      const frame = document.querySelector('iframe.giscus-frame');
+      if (frame) frame.contentWindow.postMessage({ giscus: { setConfig: { theme: next } } }, 'https://giscus.app');
     });
+
+    // Reading progress bar (shown on posts)
+    const bar = document.createElement('div');
+    bar.className = 'progress';
+    document.body.appendChild(bar);
+    window.addEventListener('scroll', () => {
+      if (!document.querySelector('.article')) { bar.style.width = '0'; return; }
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+    }, { passive: true });
   }
 
   function setActiveNav(name) {
@@ -76,6 +138,7 @@
     return `
       <a class="card" href="#/post/${encodeURIComponent(p.slug)}">
         <div class="meta">${badge(p.type)}<span>${fmtDate(p.date)}</span><span>${p.readingTime} min read</span></div>
+        <span class="arrow" aria-hidden="true">↗</span>
         <h2>${esc(p.title)}</h2>
         <p>${esc(p.summary)}</p>
         <div class="tags">${(p.tags || []).map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</div>
@@ -97,18 +160,31 @@
 
     app.innerHTML = `
       <section class="hero">
-        <div class="eyebrow">${esc(S.role)} · ${esc(S.location)}</div>
-        <h1>${esc(S.name)}</h1>
-        <p>${esc(S.intro)}</p>
-        <div class="link-row">
-          <a class="pill-link" href="#/about">About me →</a>${links}
-        </div>
-        <div class="stats">
-          <div><b>${state.posts.length}</b>posts</div>
-          <div><b>${new Set(state.posts.flatMap((p) => p.tags || [])).size}</b>topics</div>
-          <div><b>${state.posts[0] ? fmtDate(state.posts[0].date) : '–'}</b>latest</div>
+        <div class="hero-panel">
+          <div class="hero-top">
+            <div class="avatar">${S.photo
+              ? `<img src="${esc(S.photo)}" alt="${esc(S.name)}">`
+              : `<span>${esc(initials(S.name))}</span>`}</div>
+            <div>
+              <span class="status">Writing about Business Central</span>
+              <div class="eyebrow">${esc(S.role)} · ${esc(S.location)}</div>
+            </div>
+          </div>
+          <h1><span class="grad-text">${esc(S.name)}</span></h1>
+          <p class="lead">${esc(S.intro)}</p>
+          <div class="link-row">
+            ${state.posts[0] ? `<a class="pill-link primary" href="#/post/${encodeURIComponent(state.posts[0].slug)}">Read the latest post →</a>` : ''}
+            <a class="pill-link" href="#/about">About me</a>${links}
+          </div>
+          <div class="stats">
+            <div><b>${state.posts.length}</b>posts</div>
+            <div><b>${new Set(state.posts.flatMap((p) => p.tags || [])).size}</b>topics</div>
+            <div><b>${state.posts[0] ? fmtDate(state.posts[0].date) : '–'}</b>latest</div>
+          </div>
         </div>
       </section>
+
+      <div class="section-title"><h2>Posts</h2></div>
 
       <div class="toolbar">
         <div class="chips" id="chips">
@@ -134,11 +210,14 @@
       state.type = b.dataset.type;
       syncChips();
       app.querySelector('#list').innerHTML = listHtml();
+      enhanceUI(app.querySelector('#list'));
     });
     app.querySelector('#search').addEventListener('input', (e) => {
       state.q = e.target.value;
       app.querySelector('#list').innerHTML = listHtml();
+      enhanceUI(app.querySelector('#list'));
     });
+    enhanceUI(app);
   }
 
   /* ---------- Post ---------- */
@@ -158,7 +237,7 @@
       const wrap = document.createElement('div');
       wrap.className = 'codeblock';
       wrap.innerHTML =
-        `<div class="codebar"><span>${esc(lang.toUpperCase())}</span><button class="copy" type="button">Copy</button></div>`;
+        `<div class="codebar"><span><span class="dots"><i></i><i></i><i></i></span>${esc(lang.toUpperCase())}</span><button class="copy" type="button">Copy</button></div>`;
       pre.replaceWith(wrap);
       wrap.appendChild(pre);
 
@@ -211,8 +290,7 @@
         '<h2>Questions &amp; discussion</h2>' +
         '<p class="muted">Sign in with GitHub to ask a question or share your own approach.</p>' +
         '<div class="giscus-wrap"></div>';
-      const attr = document.documentElement.getAttribute('data-theme');
-      const dark = attr ? attr === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const dark = isDark();
       const s = document.createElement('script');
       s.src = 'https://giscus.app/client.js';
       s.async = true;
@@ -268,11 +346,10 @@
 
     app.innerHTML = `
       <a class="back" href="#/">← All posts</a>
-      <article class="article">
+      <article class="article article-shell">
         <div class="meta">${badge(p.type)}<span>${fmtDate(p.date)}</span><span>${p.readingTime} min read</span></div>
         <h1>${esc(p.title)}</h1>
         <div class="tags">${(p.tags || []).map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</div>
-        <div class="meta"></div>
         <div class="prose" id="prose">${window.marked.parse(md)}</div>
         <div class="share"><button class="chip" id="share">Copy link</button></div>
       </article>
@@ -284,7 +361,15 @@
       </nav>`;
 
     enhanceCode(app.querySelector('#prose'));
+    // Wide tables scroll sideways on small screens
+    app.querySelectorAll('#prose table').forEach((t) => {
+      const w = document.createElement('div');
+      w.className = 'table-wrap';
+      t.replaceWith(w);
+      w.appendChild(t);
+    });
     renderAsk(p);
+    enhanceUI(app);
     app.querySelector('#share').addEventListener('click', async (e) => {
       try {
         await navigator.clipboard.writeText(location.href);
@@ -355,10 +440,12 @@
 
     app.innerHTML = `
       <section class="about">
-        <div class="eyebrow-line">${esc(S.role)} · ${esc(S.location)}</div>
-        <h1>${esc(S.name)}</h1>
-        <div class="prose">${summary}</div>
-        <div class="link-row">${links}<button class="pill-link print-btn" id="print-btn" type="button">Save as PDF</button></div>
+        <div class="about-panel">
+          <div class="eyebrow-line">${esc(S.role)} · ${esc(S.location)}</div>
+          <h1><span class="grad-text">${esc(S.name)}</span></h1>
+          <div class="prose">${summary}</div>
+          <div class="link-row">${links}<button class="pill-link print-btn" id="print-btn" type="button">Save as PDF</button></div>
+        </div>
         ${stats ? `<div class="stat-row">${stats}</div>` : ''}
 
         ${section('Key technical highlights', highlights ? `<div class="hl-grid">${highlights}</div>` : '')}
@@ -373,6 +460,7 @@
 
     const pb = app.querySelector('#print-btn');
     if (pb) pb.addEventListener('click', () => window.print());
+    enhanceUI(app);
     window.scrollTo(0, 0);
   }
 

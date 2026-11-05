@@ -1,0 +1,108 @@
+/* =========================================================
+   Optional colour palettes for the glass theme.
+   Pick one in js/config.js:  palette: 'ocean'
+   (aurora is the default and needs no setting)
+   ========================================================= */
+
+/* ---------- Ocean: deep sea blue, aqua and Fluent blue ---------- */
+:root[data-palette="ocean"][data-theme="dark"] {
+  --bg: #030a14; --bg-2: #071a2e;
+  --blob-1: rgba(14, 116, 230, .55); --blob-2: rgba(6, 182, 212, .42); --blob-3: rgba(56, 189, 248, .28);
+  --violet: #0ea5e9; --teal: #22d3ee;
+  --accent: #38bdf8; --accent-2: #67e8f9;
+  --grad: linear-gradient(110deg, #3b82f6 0%, #0ea5e9 50%, #22d3ee 100%);
+  --grad-warm: linear-gradient(110deg, #6366f1 0%, #3b82f6 50%, #22d3ee 100%);
+  --glass: rgba(10, 30, 52, .55); --glass-strong: rgba(12, 34, 58, .74);
+  --inline-code: rgba(56, 189, 248, .14);
+}
+:root[data-palette="ocean"][data-theme="light"] {
+  --bg: #f2f7fc; --bg-2: #e6f1fb;
+  --blob-1: rgba(96, 165, 250, .42); --blob-2: rgba(103, 232, 249, .42); --blob-3: rgba(186, 230, 253, .6);
+  --accent: #0369a1; --accent-2: #0e7490;
+  --grad: linear-gradient(110deg, #1d4ed8 0%, #0284c7 50%, #0891b2 100%);
+  --grad-warm: linear-gradient(110deg, #4f46e5 0%, #2563eb 50%, #0891b2 100%);
+}
+
+/* ---------- Neon: black, electric cyan and magenta, sharper corners ---------- */
+:root[data-palette="neon"] { --radius: 12px; --radius-sm: 8px; }
+:root[data-palette="neon"][data-theme="dark"] {
+  --bg: #030305; --bg-2: #0a0a12;
+  --blob-1: rgba(236, 72, 153, .42); --blob-2: rgba(34, 211, 238, .4); --blob-3: rgba(132, 204, 22, .16);
+  --violet: #ec4899; --teal: #22d3ee;
+  --accent: #22d3ee; --accent-2: #f0abfc;
+  --grad: linear-gradient(110deg, #f0abfc 0%, #ec4899 40%, #22d3ee 100%);
+  --grad-warm: linear-gradient(110deg, #22d3ee 0%, #ec4899 100%);
+  --glass: rgba(12, 12, 20, .62); --glass-strong: rgba(14, 14, 24, .8);
+  --line: rgba(34, 211, 238, .16); --line-strong: rgba(236, 72, 153, .35);
+  --grid-line: rgba(34, 211, 238, .06);
+  --inline-code: rgba(236, 72, 153, .16);
+}
+:root[data-palette="neon"][data-theme="dark"] .card:hover,
+:root[data-palette="neon"][data-theme="dark"] .hero-panel { box-shadow: 0 0 0 1px rgba(34, 211, 238, .25), 0 0 40px -10px rgba(236, 72, 153, .55), inset 0 1px 0 var(--glass-hi); }
+:root[data-palette="neon"][data-theme="light"] {
+  --bg: #fafafa; --bg-2: #f3f0ff;
+  --blob-1: rgba(244, 114, 182, .35); --blob-2: rgba(103, 232, 249, .45); --blob-3: rgba(190, 242, 100, .3);
+  --accent: #be185d; --accent-2: #0e7490;
+  --grad: linear-gradient(110deg, #c026d3 0%, #db2777 45%, #0891b2 100%);
+  --grad-warm: linear-gradient(110deg, #0891b2 0%, #db2777 100%);
+}
+
+/* ---------- Sunset: warm plum night with amber, coral and rose ---------- */
+:root[data-palette="sunset"][data-theme="dark"] {
+  --bg: #0c0609; --bg-2: #1a0d14;
+  --blob-1: rgba(244, 63, 94, .45); --blob-2: rgba(251, 146, 60, .38); --blob-3: rgba(168, 85, 247, .3);
+  --violet: #f43f5e; --teal: #fb923c;
+  --accent: #fb923c; --accent-2: #fbbf24;
+  --grad: linear-gradient(110deg, #fbbf24 0%, #fb7185 50%, #c084fc 100%);
+  --grad-warm: linear-gradient(110deg, #f97316 0%, #f43f5e 55%, #a855f7 100%);
+  --glass: rgba(34, 16, 26, .55); --glass-strong: rgba(40, 18, 30, .74);
+  --inline-code: rgba(251, 146, 60, .16);
+}
+:root[data-palette="sunset"][data-theme="light"] {
+  --bg: #fdf7f3; --bg-2: #fdeee6;
+  --blob-1: rgba(251, 113, 133, .35); --blob-2: rgba(253, 186, 116, .45); --blob-3: rgba(216, 180, 254, .4);
+  --accent: #c2410c; --accent-2: #b45309;
+  --grad: linear-gradient(110deg, #d97706 0%, #e11d48 55%, #9333ea 100%);
+  --grad-warm: linear-gradient(110deg, #ea580c 0%, #e11d48 55%, #9333ea 100%);
+}
+
+/* ---------- Graphite: calm monochrome glass with one lime accent ---------- */
+:root[data-palette="graphite"][data-theme="dark"] {
+  --bg: #0a0a0b; --bg-2: #141416;
+  --blob-1: rgba(120, 120, 130, .28); --blob-2: rgba(163, 230, 53, .14); --blob-3: rgba(90, 90, 100, .22);
+  --violet: #a3e635; --teal: #a3e635;
+  --accent: #bef264; --accent-2: #a3e635;
+  --grad: linear-gradient(110deg, #ffffff 0%, #d4d4d8 55%, #a1a1aa 100%);
+  --grad-warm: linear-gradient(110deg, #d9f99d 0%, #a3e635 100%);
+  --glass: rgba(28, 28, 32, .58); --glass-strong: rgba(30, 30, 34, .78);
+  --inline-code: rgba(163, 230, 53, .12);
+}
+:root[data-palette="graphite"][data-theme="dark"] .pill-link.primary,
+:root[data-palette="graphite"][data-theme="dark"] .chip.on,
+:root[data-palette="graphite"][data-theme="dark"] .brand-mark { background: #bef264; color: #0a0a0b; }
+:root[data-palette="graphite"][data-theme="light"] {
+  --bg: #f5f5f4; --bg-2: #ececea;
+  --blob-1: rgba(161, 161, 170, .3); --blob-2: rgba(190, 242, 100, .3); --blob-3: rgba(212, 212, 216, .5);
+  --accent: #3f6212; --accent-2: #4d7c0f;
+  --grad: linear-gradient(110deg, #18181b 0%, #3f3f46 60%, #52525b 100%);
+  --grad-warm: linear-gradient(110deg, #65a30d 0%, #3f6212 100%);
+}
+
+/* ---------- Emerald: deep forest green with mint and gold ---------- */
+:root[data-palette="emerald"][data-theme="dark"] {
+  --bg: #03100b; --bg-2: #062016;
+  --blob-1: rgba(16, 185, 129, .45); --blob-2: rgba(234, 179, 8, .22); --blob-3: rgba(45, 212, 191, .28);
+  --violet: #10b981; --teal: #34d399;
+  --accent: #34d399; --accent-2: #fcd34d;
+  --grad: linear-gradient(110deg, #6ee7b7 0%, #34d399 45%, #fcd34d 100%);
+  --grad-warm: linear-gradient(110deg, #fcd34d 0%, #10b981 100%);
+  --glass: rgba(8, 36, 26, .55); --glass-strong: rgba(10, 40, 30, .74);
+  --inline-code: rgba(52, 211, 153, .14);
+}
+:root[data-palette="emerald"][data-theme="light"] {
+  --bg: #f3faf6; --bg-2: #e7f6ee;
+  --blob-1: rgba(110, 231, 183, .45); --blob-2: rgba(253, 224, 71, .35); --blob-3: rgba(153, 246, 228, .45);
+  --accent: #047857; --accent-2: #a16207;
+  --grad: linear-gradient(110deg, #047857 0%, #059669 50%, #ca8a04 100%);
+  --grad-warm: linear-gradient(110deg, #ca8a04 0%, #047857 100%);
+}

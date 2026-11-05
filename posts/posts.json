@@ -306,4 +306,5 @@
         "summary": "A user can apply a payment to an invoice in two clicks. Doing the same from AL code is not so obvious. Here are three simple ways to do it, with code, and the small mistakes to avoid. I learned this by reading blogs and the Business Central base app code.",
         "readingTime": 10
     }
+
 ]

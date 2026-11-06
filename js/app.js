@@ -5,10 +5,12 @@
   const app = document.getElementById('app');
 
   const TYPES = {
+    concept:  { label: 'Concepts',      cls: 't-concept' },
     issue:    { label: 'Issue',         cls: 't-issue' },
     feature:  { label: 'New Feature',   cls: 't-feature' },
     snippet:  { label: 'Code Bit',      cls: 't-snippet' },
-    solution: { label: 'Full Solution', cls: 't-solution' }
+    solution: { label: 'Full Solution', cls: 't-solution' },
+    functional: { label: 'Functional', cls: 't-functional' }
   };
 
   const state = { posts: [], type: 'all', q: '' };

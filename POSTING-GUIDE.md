@@ -41,14 +41,16 @@ If you post on Netlify Drop instead of GitHub, do steps 1 to 4, then drag the wh
 
 ---
 
-## 3. The four post types
+## 3. The six post types
 
 | Type | Use it for | Command |
 |------|------------|---------|
+| `concept` | Explain how a Business Central or AL concept works in simple words | `--type concept` |
 | `issue` | A real problem and its fix | `--type issue` |
 | `feature` | A new platform feature explained with an example | `--type feature` |
 | `snippet` | A short code bit worth keeping | `--type snippet` |
 | `solution` | A complete, working solution with full code | `--type solution` |
+| `functional` | Finance and business-process topics, such as GST and posting | `--type functional` |
 
 If you leave out `--type`, the post defaults to `snippet`.
 
@@ -72,7 +74,7 @@ summary: One sentence that shows on the post card.
 |-------|------|
 | `title` | The post heading. A colon inside the title is fine. |
 | `date` | `YYYY-MM-DD`. It decides the order on the home page. |
-| `type` | Exactly one of `issue`, `feature`, `snippet`, `solution` |
+| `type` | Exactly one of `concept`, `issue`, `feature`, `snippet`, `solution`, `functional` |
 | `tags` | Comma-separated, short, for example `AL, GST, Permissions` |
 | `summary` | One sentence. It shows on the home page card and is searchable. |
 
@@ -83,6 +85,24 @@ Keep each header value on a single line, with no line breaks.
 ## 5. Templates by type
 
 The `new` command creates these for you. They are shown here so you know what to write under each heading.
+
+### Concept
+
+````
+## Why this matters
+The confusion or mistake this clears up.
+
+## The idea in simple words
+One picture or real-life example.
+
+## In AL / Business Central
+```al
+// small example
+```
+
+## What to remember
+Three or four short points.
+````
 
 ### Issue
 
@@ -156,6 +176,22 @@ Steps to deploy or test it.
 Limitations and ideas for improvement.
 ````
 
+### Functional
+
+````
+## The business situation
+What happens in real life, in simple words.
+
+## How it works in Business Central
+Setup, documents and the entries they create.
+
+## Example
+One worked example with numbers.
+
+## What to check when it goes wrong
+A short checklist.
+````
+
 ---
 
 ## 6. Writing tips
@@ -183,7 +219,7 @@ Limitations and ideas for improvement.
 |---------|-----|
 | New post is missing from the site | Run `node tools/posts.js index`, then commit and push `posts/posts.json` too |
 | "Already exists" error | A post with the same title was created today. Use a different title |
-| Post shows the wrong type badge | Check the `type:` line is exactly `issue`, `feature`, `snippet` or `solution` |
+| Post shows the wrong type badge | Check the `type:` line is exactly `concept`, `issue`, `feature`, `snippet`, `solution` or `functional` |
 | Changed a title or tag, but the card still shows the old one | Run `node tools/posts.js index` again after editing a header |
 | Site loads but shows "Could not load posts" locally | Use `npx serve` or `python -m http.server`. Do not double-click `index.html` |
 | Update is not live yet | Wait one to two minutes, then hard refresh with Ctrl+F5 |

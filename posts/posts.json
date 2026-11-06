@@ -100,7 +100,7 @@
         "slug":  "2026-10-20-singleinstance-vs-bindsubscription",
         "title":  "SingleInstance vs BindSubscription: run an event subscriber only when you want it",
         "date":  "2026-10-20",
-        "type":  "solution",
+        "type":  "concept",
         "tags":  [
                      "AL",
                      "Events",
@@ -115,7 +115,7 @@
         "slug":  "2026-10-20-encryption-basics-hashing-aes-rsa",
         "title":  "Encryption explained like a story: hashing, AES, RSA, keys, IV and chaining (Part 1)",
         "date":  "2026-10-21",
-        "type":  "snippet",
+        "type":  "concept",
         "tags":  [
                      "Security",
                      "Encryption",
@@ -145,7 +145,7 @@
         "slug":  "2026-10-23-cbc-and-iv-questions-answered",
         "title":  "How CBC and the IV really work: 10 questions everyone asks, answered with one real example",
         "date":  "2026-10-23",
-        "type":  "snippet",
+        "type":  "concept",
         "tags":  [
                      "Security",
                      "Encryption",
@@ -160,7 +160,7 @@
         "slug":  "2026-10-24-http-requests-in-al-httpclient-headers",
         "title":  "Calling an API from AL: what I wish someone had told me about HttpClient and headers",
         "date":  "2026-10-24",
-        "type":  "solution",
+        "type":  "concept",
         "tags":  [
                      "AL",
                      "API",
@@ -175,7 +175,7 @@
         "slug": "2026-10-25-json-in-al-object-array-token-value",
         "title": "JsonObject, JsonArray, JsonToken, JsonValue: how I finally understood JSON in AL",
         "date": "2026-10-25",
-        "type": "solution",
+        "type": "concept",
         "tags": [
             "AL",
             "JSON",
@@ -236,7 +236,7 @@
         "slug": "2026-10-29-readisolation-in-al-explained-simply",
         "title": "ReadIsolation in AL, explained with one simple example",
         "date": "2026-10-29",
-        "type": "feature",
+        "type": "concept",
         "tags": [
             "AL",
             "ReadIsolation",
@@ -251,7 +251,7 @@
         "slug": "2026-10-30-what-is-a-lock-and-what-locktable-really-locks",
         "title": "What is a lock, and what does LockTable really lock?",
         "date": "2026-10-30",
-        "type": "feature",
+        "type": "concept",
         "tags": [
             "AL",
             "Locking",
@@ -266,7 +266,7 @@
         "slug": "2026-10-31-commit-in-al-what-it-really-means",
         "title": "Commit() in AL: what I wish someone had told me earlier",
         "date": "2026-10-31",
-        "type": "feature",
+        "type": "concept",
         "tags": [
             "AL",
             "Commit",
@@ -281,7 +281,7 @@
         "slug": "2026-11-02-no-series-peeknextno-vs-getnextno",
         "title": "No. Series in AL, simply explained: GetNextNo, PeekNextNo, and how to number a new document",
         "date": "2026-11-02",
-        "type": "feature",
+        "type": "concept",
         "tags": [
             "AL",
             "No. Series",
@@ -310,7 +310,7 @@
         "slug": "2026-11-04-gst-explained-simply-from-basics-to-business-central",
         "title": "GST explained simply: from \"what is GST\" to \"why is GST not coming in BC\"",
         "date": "2026-11-04",
-        "type": "feature",
+        "type": "functional",
         "tags": [
             "GST",
             "India",
@@ -326,7 +326,7 @@
         "slug": "2026-11-06-purchase-order-posting-entries-explained",
         "title": "What happens when you post a purchase in Business Central? Every entry, step by step",
         "date": "2026-11-06",
-        "type": "feature",
+        "type": "functional",
         "tags": [
             "Business Central",
             "Purchase",

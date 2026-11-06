@@ -5,14 +5,14 @@
  *   node tools/posts.js new "Post title" --type snippet --tags "AL, Reports"
  *   node tools/posts.js index
  *
- * Types: issue | feature | snippet | solution
+ * Types: concept | issue | feature | snippet | solution | functional
  */
 const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 
 const POSTS_DIR = path.join(__dirname, '..', 'posts');
-const TYPES = ['issue', 'feature', 'snippet', 'solution'];
+const TYPES = ['concept', 'issue', 'feature', 'snippet', 'solution', 'functional'];
 
 const TEMPLATES = {
   issue: `## The problem
@@ -64,6 +64,40 @@ One line on when you need this.
 ## How it works
 
 Short explanation.
+`,
+  concept: `## Why this matters
+
+The confusion or mistake this clears up.
+
+## The idea in simple words
+
+One picture or real-life example.
+
+## In AL / Business Central
+
+\`\`\`al
+// small example
+\`\`\`
+
+## What to remember
+
+Three or four short points.
+`,
+  functional: `## The business situation
+
+What happens in real life, in simple words.
+
+## How it works in Business Central
+
+Setup, documents and the entries they create.
+
+## Example
+
+One worked example with numbers.
+
+## What to check when it goes wrong
+
+A short checklist.
 `,
   solution: `## Requirement
 
@@ -175,7 +209,7 @@ function newPost(args) {
     return i >= 0 && args[i + 1] ? args[i + 1] : fallback;
   };
   if (!title) {
-    console.error('Usage: node tools/posts.js new "Title" --type issue|feature|snippet|solution --tags "a, b"');
+    console.error('Usage: node tools/posts.js new "Title" --type concept|issue|feature|snippet|solution|functional --tags "a, b"');
     process.exit(1);
   }
   const type = opt('type', 'snippet');

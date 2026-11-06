@@ -2,7 +2,7 @@
 
 ## 1. Extension Name & Purpose
 
-**My Blog** is a static public website that doubles as a professional profile. It publishes one post a day in four categories: **Issues**, **New Features**, **Code Bits** and **Full Solutions**. The About page lists skills and highlights so the site shows what you can do. No server, database or build step is needed.
+**My Blog** is a static public website that doubles as a professional profile. It publishes posts in six categories: **Concepts**, **Issues**, **New Features**, **Code Bits**, **Full Solutions** and **Functional** topics. The About page lists skills and highlights so the site shows what you can do. No server, database or build step is needed.
 
 ## 2. Object List
 
@@ -41,7 +41,7 @@ node tools/posts.js index
 git add . && git commit -m "Post: Fix for X error" && git push
 ```
 
-Types: `issue`, `feature`, `snippet`, `solution`.
+Types: `concept` (how something works, explained simply), `issue`, `feature` (new platform features), `snippet`, `solution`, `functional` (finance and business-process topics).
 
 Post front matter looks like this:
 

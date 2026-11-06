@@ -9,7 +9,7 @@ window.SITE = {
 
   // Shown on the home page hero
   intro:
-    'I write one post a day about real Business Central problems I hit, new platform features I try, ' +
+    'I write few posts a week about real Business Central problems I hit, new platform features I try, ' +
     'small AL code bits worth keeping, and complete working solutions you can copy.',
 
   // Shown in the hero, About page and footer. Remove any you do not want public.

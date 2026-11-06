@@ -321,5 +321,22 @@
         ],
         "summary": "GST in simple words, the way I finally understood it. Who actually pays GST, where CGST, SGST and IGST money goes, registered and unregistered vendors, input credit and GSTR-2B, reverse charge, and at the end a Business Central checklist for when GST is not coming.",
         "readingTime": 21
+    },
+    {
+        "slug": "2026-11-06-purchase-order-posting-entries-explained",
+        "title": "What happens when you post a purchase in Business Central? Every entry, step by step",
+        "date": "2026-11-06",
+        "type": "feature",
+        "tags": [
+            "Business Central",
+            "Purchase",
+            "Finance Basics",
+            "Functional",
+            "GST",
+            "TDS",
+            "India"
+        ],
+        "summary": "Purchase posting explained for developers with zero finance background. We start with the simplest purchase (one G/L line, no tax), then add GST, then an item, then mix both, then TDS and reverse charge. One small step at a time, with every entry BC creates and why.",
+        "readingTime": 22
     }
 ]

@@ -1,5 +1,5 @@
 ---
-title: "GST explained simply: 'from what is GST' to 'why is GST' not coming in BC"
+title: GST explained simply- 'from what is GST' to 'why is GST' not coming in BC
 date: 2026-11-04
 type: feature
 tags: GST, India, Business Central, Functional, Finance Basics, Tax Engine

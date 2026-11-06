@@ -34,9 +34,9 @@ window.SITE = {
   // Get the values at https://giscus.app (see POSTING-GUIDE.md, section 8).
   comments: {
   repo: 'anilkcs001/anilkcs001.github.io',
-  repoId: 'R_paste_here',
+  repoId: 'R_kgDOVPCHjQ',
   category: 'Q&A',
-  categoryId: 'DIC_paste_here'
+  categoryId: 'DDIC_kwDOVPCHjc4DJq1g'
 },
   // ---------- About page ----------
 

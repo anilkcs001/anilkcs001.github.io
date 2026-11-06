@@ -36,7 +36,7 @@ window.SITE = {
   repo: 'anilkcs001/anilkcs001.github.io',
   repoId: 'R_kgDOVPCHjQ',
   category: 'Q&A',
-  categoryId: 'DDIC_kwDOVPCHjc4DJq1g'
+  categoryId: 'DIC_kwDOVPCHjc4DJq1g'
 },
   // ---------- About page ----------
 

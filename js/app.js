@@ -333,6 +333,7 @@
             <div><b>${state.posts.length}</b>posts</div>
             <div><b>${new Set(state.posts.flatMap((p) => p.tags || [])).size}</b>topics</div>
             <div><b>${state.posts[0] ? fmtDate(state.posts[0].date) : '–'}</b>latest</div>
+            <div id="total-views" hidden></div>
           </div>
         </div>
       </section>
@@ -371,6 +372,7 @@
       enhanceUI(app.querySelector('#list'));
     });
     enhanceUI(app);
+    showViews(app.querySelector('#total-views'), 'TOTAL');
   }
 
   /* ---------- Post ---------- */
@@ -500,7 +502,7 @@
     app.innerHTML = `
       <a class="back" href="#/">← All posts</a>
       <article class="article article-shell">
-        <div class="meta">${badge(p.type)}<span>${fmtDate(p.date)}</span><span>${p.readingTime} min read</span></div>
+        <div class="meta">${badge(p.type)}<span>${fmtDate(p.date)}</span><span>${p.readingTime} min read</span><span id="post-views" hidden></span></div>
         <h1>${esc(p.title)}</h1>
         <div class="tags">${(p.tags || []).map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</div>
         <div class="prose" id="prose">${window.marked.parse(md)}</div>
@@ -523,6 +525,7 @@
     });
     renderAsk(p);
     enhanceUI(app);
+    showViews(app.querySelector('#post-views'), '/post/' + p.slug, 'views');
     app.querySelector('#share').addEventListener('click', async (e) => {
       try {
         await navigator.clipboard.writeText(location.href);
@@ -637,6 +640,31 @@
     if (page === 'about') return renderAbout();
     if (page === 'post' && parts[1]) return renderPost(decodeURIComponent(parts[1]));
     renderNotFound();
+  }
+
+  /* ---------- Public view counts (GoatCounter) ---------- */
+  // Needs "Allow adding visitor counts on your website" switched on in GoatCounter settings.
+  // GoatCounter caches these numbers for up to a few hours, so they lag a little behind.
+  const viewCache = {};
+  function fetchViews(path) {
+    const code = (S.goatcounter || '').trim();
+    if (!/^[a-z0-9-]+$/i.test(code)) return Promise.resolve(null);
+    if (!viewCache[path]) {
+      const p = path === 'TOTAL' ? 'TOTAL' : encodeURIComponent(path);
+      viewCache[path] = fetch('https://' + code + '.goatcounter.com/counter/' + p + '.json')
+        .then((r) => (r.ok ? r.json() : null))
+        .then((j) => (j && j.count ? String(j.count) : null))
+        .catch(() => null);
+    }
+    return viewCache[path];
+  }
+  function showViews(el, path, suffix) {
+    if (!el) return;
+    fetchViews(path).then((n) => {
+      if (!n || n === '0') return;
+      el.innerHTML = suffix ? `${esc(n)} ${suffix}` : `<b>${esc(n)}</b>views`;
+      el.hidden = false;
+    });
   }
 
   /* ---------- Visitor counter (GoatCounter) ---------- */

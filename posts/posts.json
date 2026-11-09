@@ -338,5 +338,22 @@
         ],
         "summary": "Purchase posting explained for developers with zero finance background. We start with the simplest purchase (one G/L line, no tax), then add GST, then an item, then mix both, then TDS and reverse charge. One small step at a time, with every entry BC creates and why.",
         "readingTime": 22
+    },
+     {
+        "slug": "2026-11-09-direct-paste-excel-rows-into-business-central",
+        "title": "Direct Paste: copy rows from Excel and paste them straight into Business Central (open source)",
+        "date": "2026-11-09",
+        "type": "solution",
+        "tags": [
+            "Control Add-in",
+            "AL",
+            "JavaScript",
+            "Excel",
+            "Data Import",
+            "Open Source",
+            "Business Central"
+        ],
+        "summary": "I built Direct Paste, a free MIT-licensed extension. Copy rows from Excel, paste them in a FactBox, check the column links, and Business Central validates every row before inserting anything. Here is how it looks and how it works inside.",
+        "readingTime": 11
     }
 ]

@@ -149,7 +149,7 @@
     document.getElementById('brand-mark').textContent = initials(S.name);
     const links = (S.links || []).map((l) => extLink(l, '')).join(' · ');
     document.getElementById('footer').innerHTML =
-      `<span>© ${new Date().getFullYear()} ${esc(S.name)}</span><span>${links}</span>`;
+      `<span>© ${new Date().getFullYear()} ${esc(S.name)} · Posts licensed <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></span><span>${links}</span>`;
 
     document.getElementById('theme-toggle').addEventListener('click', () => {
       const root = document.documentElement;

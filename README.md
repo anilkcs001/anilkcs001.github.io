@@ -100,3 +100,9 @@ Code blocks tagged `al` are coloured using the Delphi/Pascal grammar, the closes
         "summary": "One HSN code can need over 100 GST rate lines in Business Central, and a company has hundreds of HSN codes. Instead of exporting to Excel, filling rows and importing back, I built a generator that creates every rate from data BC already has. Here's why I built it, how it works, why the duplicate check matters so much, and how you can build your own.",
         "readingTime": 16
     }
+
+## Licence
+
+- **Code** (`index.html`, `js/`, `css/`, `tools/`): MIT License, see [LICENSE](LICENSE).
+- **Posts and images** (`posts/*.md`, `images/`): CC BY 4.0, see [LICENSE-CONTENT.md](LICENSE-CONTENT.md). Anyone may reuse them with credit and a link back.
+- **CV** (`files/`): personal, not licensed for reuse.

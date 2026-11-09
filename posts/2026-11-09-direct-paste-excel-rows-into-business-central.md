@@ -16,7 +16,7 @@ Configuration packages are too heavy for this. Nobody wants to set up a package 
 
 So I always had this idea in my mind. A few days back I saw Erik Hougaard's **Magic Paste**, and that pushed me to finally build my own. I wrote it from scratch, named it **Direct Paste**, and I'm sharing it free.
 
-**Here's the code:** [github.com/anilkcs001/DirectPaste](https://github.com/anilkcs001/DirectPaste). It's MIT licensed, so you can use it, change it, ship it to your customers, anything.
+**Here's the code:** [github.com/anilkcs001/DirectPaste](https://github.com/anilkcs001/DirectPaste). It's MIT licensed, so you can use it, change it, ship it to your customers, anything. I built and tested it on **Business Central 2026 release wave 1 (version 28)**.
 
 Let me first show you what the user sees, and then I'll explain how it works inside.
 
@@ -243,7 +243,7 @@ Want it on a Purchase Order? Change it to Purchase Line. On an Item Journal? The
 4. Give users the permission set **AML Direct Paste**. They still need their normal rights to insert Sales Lines. Direct Paste doesn't give anyone extra rights.
 5. Open a Sales Order with status Open, paste something, check it, press OK.
 
-It only needs the Base Application and System Application (v25). No Azure, no outside API. Your data never leaves Business Central.
+It only needs the Base Application and System Application (version 28). No Azure, no outside API. Your data never leaves Business Central.
 
 ## Things you should know
 
@@ -253,7 +253,7 @@ I don't want to oversell it, so here are the limits:
 - **Big pastes take time.** Every row is inserted and rolled back once during the check, tax calculation included. A few hundred lines take seconds. A few thousand can take minutes.
 - **Confirm popups get in the way.** If a field's validation asks the user a question, it will interrupt the check. Map or default your fields so the question doesn't come up.
 - **Limits.** 5,000 rows and 200 columns per paste. Only plain text is read, so Excel formulas come in as their values. You can't drop an `.xlsx` file. Just copy the cells instead.
-- **Try it in a sandbox first.** It's a PTE built for BC 2024 release wave 2 (v25), with India localisation in mind. Please test it on your version before putting it in production.
+- **Try it in a sandbox first.** It's a PTE built for BC 2026 release wave 1 (version 28), with India localisation in mind. If you're on an older version, it may need small changes. Either way, test it on your version before putting it in production.
 
 ## How I built it
 

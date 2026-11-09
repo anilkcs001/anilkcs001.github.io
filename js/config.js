@@ -87,7 +87,7 @@ window.SITE = {
     },
     {
       title: 'Fermentation module',
-      text: 'Blocks each lot while it ferments, then converts it to the fermented item after a holding period, with audit log and escalation emails.'
+      text: 'Blocks each lot while it ferments, then converts it to the fermented item after a holding period through an Item Reclassification journal.'
     },
     {
       title: 'Dynamic Email Templates',
@@ -127,7 +127,6 @@ window.SITE = {
           duration: 'Current',
           bullets: [
             'Developed the fermentation module: a Fermentation Card per lot blocks the lot while it ferments, then converts the unfermented item to the fermented item after a configurable holding period through an Item Reclassification journal, keeping lot, location, quantity and unit of measure.',
-            'Added traceability and alerts: a conversion log as audit trail, and email notifications before, on and after the planned date with escalation for overdue lots.',
             'Built the Item Requisition module: users request new items, route them for approval, and the Item is created automatically on approval. Added Excel import and fixed duplicate numbers for concurrent users.'
           ]
         },
@@ -172,7 +171,7 @@ window.SITE = {
     { group: 'AI & Security',
       items: ['Azure OpenAI', 'System.AI', 'AI Agents', 'AES / RSA', 'Isolated Storage', 'SecretText'] },
     { group: 'Tools & Quality',
-      items: ['VS Code', 'Git', 'Azure DevOps', 'CI/CD', 'Debugging', 'Performance (SetLoadFields, SIFT)', 'Code Review',
+      items: ['VS Code', 'Git', 'Azure DevOps', 'Debugging', 'Performance (SetLoadFields, SIFT)', 'Code Review',
               'Unit Testing', 'Technical Design Documents', 'Upgrades', 'Production Support'] }
   ],
 

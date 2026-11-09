@@ -297,6 +297,15 @@
     return items.map(cardHtml).join('');
   }
 
+  // "Download CV" button, shown when S.resume.url is set in config.js
+  function cvLink(extraClass) {
+    const r = S.resume || {};
+    if (!r.url) return '';
+    const label = r.label || 'Download CV';
+    return `<a class="pill-link cv-link ${extraClass || ''}" href="${esc(r.url)}" download target="_blank" rel="noopener">` +
+      `<span aria-hidden="true">⤓</span> ${esc(label)}</a>`;
+  }
+
   function renderHome() {
     setActiveNav('home');
     setTitle('');
@@ -317,7 +326,7 @@
             <p class="lead">${esc(S.intro)}</p>
             <div class="link-row">
               ${state.posts[0] ? `<a class="pill-link primary" href="#/post/${encodeURIComponent(state.posts[0].slug)}">Read the latest post →</a>` : ''}
-              <a class="pill-link" href="#/about">About me</a>${links}
+              <a class="pill-link" href="#/about">About me</a>${cvLink()}${links}
             </div>
           </div>
           <div class="stats">
@@ -591,7 +600,7 @@
           <div class="eyebrow-line">${esc(S.role)} · ${esc(S.location)}</div>
           <h1><span class="grad-text">${esc(S.name)}</span></h1>
           <div class="prose">${summary}</div>
-          <div class="link-row">${links}<button class="pill-link print-btn" id="print-btn" type="button">Save as PDF</button></div>
+          <div class="link-row">${cvLink('primary')}${links}${(S.resume || {}).url ? '' : '<button class="pill-link print-btn" id="print-btn" type="button">Save as PDF</button>'}</div>
         </div>
         ${stats ? `<div class="stat-row">${stats}</div>` : ''}
 

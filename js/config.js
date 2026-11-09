@@ -5,11 +5,11 @@
 window.SITE = {
   name: 'Anil Kumar Paidimukkala',
   role: 'Dynamics 365 Business Central Technical Consultant',
-  location: 'India',
+  location: 'Chennai, India',
 
   // Shown on the home page hero
   intro:
-    'I write few posts a week about real Business Central problems I hit, new platform features I try, ' +
+    'I write a few posts a week about real Business Central problems I hit, new platform features I try, ' +
     'small AL code bits worth keeping, and complete working solutions you can copy.',
 
   // Shown in the hero, About page and footer. Remove any you do not want public.
@@ -40,37 +40,62 @@ window.SITE = {
 },
   // ---------- About page ----------
 
+  // Your CV for the "Download CV" buttons (home and About). Put the PDF in the /files folder.
+  // Leave url empty to hide the buttons.
+  resume: {
+    url: 'files/Anil-Kumar-Paidimukkala-BC-Technical-Consultant.pdf',
+    label: 'Download CV'
+  },
+
   summary: [
-    'Business Central Technical Consultant with 3+ years of hands-on experience across implementation and support projects. ' +
-    'I work from requirement gathering and business process analysis through solution design, AL development, testing and production support.',
-    'My functional ground covers Finance, Procurement, Purchase, Sales, Inventory, Budgeting, Fixed Assets, Approvals and India GST. ' +
-    'I enjoy turning business requirements into scalable extensions, workflows, reports, integrations and automation.'
+    'Dynamics 365 Business Central Technical Consultant with 3+ years delivering end-to-end BC solutions across ' +
+    'Manufacturing, Education and Finance Integration. I build extensions, approval workflows, posting logic, 50+ reports ' +
+    'and secure integrations (OData V4, REST, OAuth 2.0, SharePoint, callbacks).',
+    'I work from requirement gathering and solution design through AL development, testing, deployment, upgrades and ' +
+    'production support. My functional ground covers Purchase, Sales, General Ledger, Inventory and Lot Tracking, ' +
+    'Dimensions, Fixed Assets, Budgeting, Approvals, and India GST and TDS.'
   ],
 
   stats: [
-    { value: '3+',  label: 'years in Business Central' },
-    { value: '50+', label: 'RDLC & Excel reports delivered' },
-    { value: 'MB-820', label: 'Developer Associate certified' },
-    { value: '2',   label: 'end-to-end projects' }
+    { value: '3+',     label: 'years in Business Central' },
+    { value: '4',      label: 'client projects' },
+    { value: '50+',    label: 'RDLC, Word & Excel reports' },
+    { value: 'MB-820', label: 'Developer Associate certified' }
   ],
 
   // Key technical highlights
   highlights: [
     {
-      title: 'Reusable BC frameworks',
-      text: 'Built reusable frameworks for Buyer Assignment, Dynamic No. Series and Dynamic Email Templates.'
+      title: 'Custom approval workflow',
+      text: 'Multi-level, sequential, parallel, mandatory and minimum-group approvals in AL, so every document reaches the right approvers in the right order.'
     },
     {
-      title: 'SharePoint DMS + secure banking',
-      text: 'Built document management with SharePoint and Microsoft Graph API, and secure bank integrations using AES/RSA encryption.'
+      title: 'Integration with callbacks',
+      text: 'OData V4 and $batch with OAuth 2.0, staging and validation, POSTED / FAILED callbacks and exponential back-off retry, so no failure is lost.'
+    },
+    {
+      title: 'SharePoint FactBox',
+      text: 'Upload from a BC page to SharePoint through Microsoft Graph API and link it to the record, so users reach documents without leaving Business Central.'
+    },
+    {
+      title: 'Secure banking integration',
+      text: 'AES for the data and RSA for the AES key, so bank data stays protected end to end.'
     },
     {
       title: 'GST Rate Generator',
-      text: 'Automated HSN and state-wise CGST, SGST and IGST setup for India GST.'
+      text: 'Creates every missing CGST, SGST and IGST rate line on the Tax Engine automatically, removing manual GST setup.'
     },
     {
-      title: 'AI Agent with Azure OpenAI',
-      text: 'Built AI-assisted document processing in Business Central using Azure OpenAI and the System.AI module.'
+      title: 'Fermentation module',
+      text: 'Blocks each lot while it ferments, then converts it to the fermented item after a holding period, with audit log and escalation emails.'
+    },
+    {
+      title: 'Dynamic Email Templates',
+      text: 'Own templates with placeholders for record data, triggered from standard events and reusable across processes.'
+    },
+    {
+      title: 'AI agent with Azure OpenAI',
+      text: 'AI-assisted invoice processing in Business Central using Azure OpenAI and the System.AI module.'
     }
   ],
 
@@ -80,33 +105,50 @@ window.SITE = {
       company: 'PwC India, Chennai',
       period: 'Aug 2023 – Present',
       bullets: [
-        'Worked across implementation and support projects: requirement gathering, business process analysis, development, testing, troubleshooting, deployment and production support.',
-        'Engaged with business stakeholders to translate Finance, Procurement, Purchase, Sales, Inventory, Budgeting and India GST requirements into Business Central solutions.',
-        'Developed and customized extensions in AL using Interfaces, RecordRef/FieldRef, RecordId, Dictionary, Events, reusable frameworks and APIs.',
-        'Built integrations using REST / Business Central APIs, Microsoft Graph API, SharePoint, Power Automate and Business Events.',
-        'Developed RDLC and Excel-based reports for financial, MIS, operational and management requirements.',
-        'Used Azure DevOps and Git for work tracking, source control, collaboration and delivery.'
+        'Delivered end-to-end AL solutions: design, development, testing, deployment, upgrades and support.',
+        'Extended standard behavior with events, subscribers, interfaces, RecordRef/FieldRef and reusable frameworks.',
+        'Implemented posting and finance logic: Purchase, Sales and G/L posting, item charge assignment, dimensions, India GST and TDS.',
+        'Developed integrations and 50+ reports: API and web service integrations; RDLC, Word and Excel reports.',
+        'Ensured quality: debugging, code reviews, performance tuning and design documents, with Git and Azure DevOps.'
       ],
       projects: [
         {
-          name: 'Education Sector Implementation',
-          duration: 'Current',
+          name: 'Finance Integration Project (Logistics)',
+          duration: 'Sep 2026 – Present',
           bullets: [
-            'Customized procurement and finance processes, including purchase requisitions, budgeting, approvals and procurement controls.',
-            'Designed a configurable multi-level approval workflow for different approval scenarios.',
-            'Automated notifications using email templates, Business Events and Power Automate.',
-            'Built document management with SharePoint, accessible directly from Business Central pages.',
-            'Delivered reusable components such as configurable number series, secure bank integration and India GST setup automation.'
+            'Built the inbound integration: an external TMS sends Customer, Vendor, AP and AR data through OData V4 (single-record and $batch) with OAuth 2.0 into staging tables that are validated and posted. 100 vendors are checked and created in about 7 seconds.',
+            'Implemented the posting callback: BC sends POSTED / FAILED with document number, batch and status message; failures go first and a posting is never sent twice.',
+            'Designed error handling: errors are checked once up front, failed records are corrected and re-uploaded, and retry with exponential back-off covers 429, 500 and timeouts. A job queue every 5 minutes posts 100 records in about a minute.',
+            'Tested parallel API calls (500 records in about 10 seconds), integrated the Payment Receipt API and wrote the integration guides.'
           ]
         },
         {
-          name: 'Manufacturing Sector Implementation',
-          duration: '16 months',
+          name: 'Food Manufacturing Implementation',
+          duration: 'Current',
           bullets: [
-            'Translated business requirements into AL customizations across Sales, Purchase and Finance.',
-            'Developed 50+ RDLC and Excel reports for MIS, operational, financial and year-end reporting.',
-            'Automated sales processing through Excel upload, from invoice creation to settlement.',
-            'Customized purchase, warehouse and posting processes, and extended dimensions for richer financial analysis.'
+            'Developed the fermentation module: a Fermentation Card per lot blocks the lot while it ferments, then converts the unfermented item to the fermented item after a configurable holding period through an Item Reclassification journal, keeping lot, location, quantity and unit of measure.',
+            'Added traceability and alerts: a conversion log as audit trail, and email notifications before, on and after the planned date with escalation for overdue lots.',
+            'Built the Item Requisition module: users request new items, route them for approval, and the Item is created automatically on approval. Added Excel import and fixed duplicate numbers for concurrent users.'
+          ]
+        },
+        {
+          name: 'Education Sector Implementation and Support',
+          duration: 'Jan 2025 – Present',
+          bullets: [
+            'Implemented procurement and budgeting: Purchase Requisitions, Buyer Assignment, CAPEX/OPEX budgeting, and invoice posting that routes capital purchases to Fixed Assets and consumables to expenses.',
+            'Built a fully customized approval workflow with Dynamic Email Templates and Power Automate / Teams notifications.',
+            'Delivered GST (CGST, SGST, IGST, Cess) and TDS totals on the Purchase Order subform with Page Background Tasks, and a "By Amount to Receive" item charge assignment.',
+            'Integrated a reusable SharePoint FactBox, secure bank integration with AES and RSA, an Azure OpenAI invoice agent, Dynamic No. Series and the GST Rate Generator.'
+          ]
+        },
+        {
+          name: 'Tea Industry Implementation and Support',
+          duration: 'Dec 2023 – Mar 2025',
+          bullets: [
+            'Automated sales: users upload an Excel file and the system creates Sales Invoices and handles settlement and distribution across brokers.',
+            'Delivered RDLC and Excel reports (MIS, operational, financial, payroll and year-end) for manufacturing and sorting operations.',
+            'Integrated GST e-invoicing with ClearTax for tax compliance.',
+            'Customized purchase invoice and posting processes, and extended dimensions from 8 to 13.'
           ]
         }
       ]
@@ -114,21 +156,24 @@ window.SITE = {
   ],
 
   functional: [
-    'Finance & Accounting', 'General Ledger', 'Payables & Receivables', 'Procurement', 'Purchase',
-    'Sales', 'Inventory', 'Budgeting', 'CAPEX / OPEX', 'Fixed Assets', 'Approvals & Workflows', 'India GST'
+    'Purchase', 'Sales', 'General Ledger', 'Payables & Receivables', 'Item Journals & Lot Tracking',
+    'Dimensions', 'Fixed Assets', 'Budgeting', 'CAPEX / OPEX', 'Approval Workflows', 'India GST', 'India TDS'
   ],
 
   skills: [
     { group: 'AL Development',
-      items: ['AL / C-AL', 'Extensions', 'Tables', 'Pages', 'Codeunits', 'Interfaces', 'RecordRef / FieldRef', 'RecordId', 'Dictionary', 'Events / Event Subscribers'] },
-    { group: 'Integration & APIs',
-      items: ['REST APIs', 'BC APIs', 'OData', 'Microsoft Graph API', 'Business Events', 'HTTP Services', 'SharePoint', 'Power Automate', 'JSON / XML'] },
+      items: ['BC Architecture', 'Extensions (PTE)', 'Tables', 'Pages', 'Codeunits', 'Reports', 'Queries', 'XMLports',
+              'Interfaces', 'Enums', 'Events & Subscribers', 'Page Background Tasks', 'RecordRef / FieldRef', 'Permission Sets'] },
+    { group: 'Integrations',
+      items: ['REST', 'JSON', 'OData V4', '$batch', 'API Pages', 'Web Services', 'OAuth 2.0', 'Retry & Error Handling',
+              'Job Queue', 'SOAP', 'Microsoft Graph', 'SharePoint', 'Power Automate', 'Business Events'] },
     { group: 'Reporting',
-      items: ['RDLC', 'Excel Buffer'] },
-    { group: 'Security',
-      items: ['AES / RSA'] },
-    { group: 'AI & DevOps',
-      items: ['Azure OpenAI', 'System.AI', 'Azure DevOps', 'Git'] }
+      items: ['RDLC', 'Word Layouts', 'Excel Buffer', 'MIS Reports'] },
+    { group: 'AI & Security',
+      items: ['Azure OpenAI', 'System.AI', 'AI Agents', 'AES / RSA', 'Isolated Storage', 'SecretText'] },
+    { group: 'Tools & Quality',
+      items: ['VS Code', 'Git', 'Azure DevOps', 'CI/CD', 'Debugging', 'Performance (SetLoadFields, SIFT)', 'Code Review',
+              'Unit Testing', 'Technical Design Documents', 'Upgrades', 'Production Support'] }
   ],
 
   certifications: [

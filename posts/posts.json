@@ -353,7 +353,7 @@
             "Open Source",
             "Business Central"
         ],
-        "summary": "I built Direct Paste, a free MIT-licensed extension. Copy rows from Excel, paste them in a FactBox, check the column links, and Business Central validates every row before inserting anything. Here is how it looks and how it works inside.",
-        "readingTime": 11
+        "summary": "I built a small free tool called Direct Paste. You copy rows from Excel, paste them in Business Central, check the columns once, and BC checks every row before saving anything. Here's how it looks and how I made it work.",
+        "readingTime": 14
     }
 ]

@@ -3,40 +3,44 @@ title: "Direct Paste: copy rows from Excel and paste them straight into Business
 date: 2026-11-09
 type: solution
 tags: Control Add-in, AL, JavaScript, Excel, Data Import, Open Source, Business Central
-summary: I built Direct Paste, a free MIT-licensed extension. Copy rows from Excel, paste them in a FactBox, check the column links, and Business Central validates every row before inserting anything. Here is how it looks and how it works inside.
+summary: I built a small free tool called Direct Paste. You copy rows from Excel, paste them in Business Central, check the columns once, and BC checks every row before saving anything. Here's how it looks and how I made it work.
 ---
 
-Every implementation I have worked on has this one request: *"Can we just paste the lines from Excel?"*
+In every project I've worked on, at some point a user comes to me and asks the same thing:
 
-The customer sends a purchase order as an Excel sheet. The sales person has 40 lines to enter. Configuration packages are too heavy for a daily job, Edit in Excel needs a proper layout, and typing 40 lines by hand is how mistakes happen.
+*"Anil, can't we just paste the lines from Excel?"*
 
-Recently Erik Hougaard showed his **Magic Paste** idea, and it got me thinking. So I built my own version from scratch and made it open source. I call it **Direct Paste**.
+And honestly, they're right to ask. The customer sends the order as an Excel sheet. Forty lines. The sales person has to type every item code, quantity and rate into the Sales Order again. One wrong digit and the order goes wrong.
 
-**Code on GitHub:** [github.com/anilkcs001/DirectPaste](https://github.com/anilkcs001/DirectPaste), MIT licence, free to use, change and ship.
+Configuration packages are too heavy for this. Nobody wants to set up a package for a daily order. Edit in Excel works, but the sheet must be in BC's layout, and customer sheets are never in BC's layout.
 
-In this post I'll first show how it looks for a user, then explain how it works inside, and at the end how to put it on your own page.
+So I always had this idea in my mind. A few days back I saw Erik Hougaard's **Magic Paste**, and that pushed me to finally build my own. I wrote it from scratch, named it **Direct Paste**, and I'm sharing it free.
 
-> The screenshots below are the real add-in scripts from the repo, running in a browser with sample data (Sales Order **SO-50012**, a fastener sheet). Inside Business Central they look the same, sitting in the FactBox pane and in a dialog.
+**Here's the code:** [github.com/anilkcs001/DirectPaste](https://github.com/anilkcs001/DirectPaste). It's MIT licensed, so you can use it, change it, ship it to your customers, anything.
 
-## How it looks for the user
+Let me first show you what the user sees, and then I'll explain how it works inside.
 
-### Step 1: Paste in the FactBox
+> Quick note on the screenshots: these are the actual add-in scripts from the repo, running in a browser with sample data (Sales Order SO-50012 and a fastener order sheet). Inside Business Central it looks the same. The paste zone sits in the FactBox pane, and the mapper opens as a dialog.
 
-Open a Sales Order. In the FactBox pane on the right there is a paste zone. Copy the rows in Excel (with or without the header row), click the zone and press **Ctrl+V**. You can also drop a CSV file on it.
+## What the user sees
 
-![Direct Paste FactBox with the paste zone](images/direct-paste/factbox.png)
+### First, they paste
 
-That's it for the user's side of the "import". No file upload, no Excel template to download first.
+Open any Sales Order. On the right side, in the FactBox pane, there's a small paste box. Go to Excel, select the rows (header row included or not, doesn't matter), copy, click the box and press **Ctrl+V**.
 
-### Step 2: Check the links in the mapper
+![The Direct Paste box in the FactBox](images/direct-paste/factbox.png)
 
-The paste opens a dialog. On the left are **your columns** from Excel. On the right are the **Business Central fields** of Sales Line. The lines in between show which column goes into which field.
+That's all the user does. No file to upload, no template to download first. If someone has a CSV file, they can just drop it on the box.
 
-![Mapper after auto-mapping a typical Indian Excel sheet](images/direct-paste/mapper-auto-map.png)
+### Then they check the columns
 
-Look at what happened with a very normal Indian sheet:
+Now a dialog opens. On the left are the columns from their Excel. On the right are the Sales Line fields. The lines in between show what goes where.
 
-| Excel header | Mapped to |
+![The mapper after it matched the columns by itself](images/direct-paste/mapper-auto-map.png)
+
+Look at what it did with a very normal Indian sheet. Nobody set anything up:
+
+| Excel header | Went into |
 |---|---|
 | Item Code | No. |
 | Particulars | Description |
@@ -46,85 +50,91 @@ Look at what happened with a very normal Indian sheet:
 | Delivery Date | Shipment Date |
 | HSN | HSN/SAC Code |
 | Godown | Location Code |
-| Sr No | *not imported* |
+| Sr No | *skipped* |
 
-8 of 9 columns linked without any setup. "Sr No" is skipped on purpose, because it's just a row counter.
+8 out of 9 columns matched on their own. "Sr No" is skipped on purpose, because it's just a serial number. We don't want that anywhere.
 
-A few things you can see on the screen:
+A few small things on this screen I'm happy about:
 
-- **Document Type** and **Document No.** are shown as "Set automatically". They come from the Sales Order you are on, so the user can't map them wrongly.
-- A **dashed** line means auto-matched. A **dotted amber** line means "I'm not sure, please check". A **solid** line is one you linked yourself.
-- To change a link, drag the dot from a column onto a field, or click a column and then a field. Click a line to remove it.
-- Every field has a **default** box. For a field with no column (for example Type = Item), the default fills every row. For a linked field, it fills only the blank cells.
-- The preview at the bottom shows the actual rows and which column goes where.
+- **Document Type** and **Document No.** show as "Set automatically". They come from the order you're standing on, so the user can't mess them up.
+- A **dashed** line means "I matched this myself". A **dotted orange** line means "I'm not sure, please check this one". A **solid** line means you linked it.
+- If something is wrong, just drag the dot from a column to the right field. Or click the column, then click the field. To remove a link, click the line.
+- Every field has a **default** box. Say your sheet has no "Type" column. Put "Item" as the default and every line gets it. If the field already has a column, the default only fills the empty cells.
+- The table at the bottom shows the real rows, so you can see the data before anything happens.
 
-### Step 3: Save it as a template
+### If it's the same sheet every week, save it
 
-If the same customer sends the same sheet every week, you don't want to check links every time. Click **Save as template**, give it a name, and it's saved for the whole company.
+Some customers send the same format every single week. Checking the links every time is boring. So click **Save as template**, give it a name, and done. It's saved for everyone in the company.
 
-Next time someone pastes a sheet with the same headers, Direct Paste recognises it and applies the template automatically:
+Next time anybody pastes a sheet with the same headers, Direct Paste recognises it and applies the template by itself:
 
-![Template recognised from the pasted headers](images/direct-paste/mapper-template.png)
+![Direct Paste recognised the sheet and applied the saved template](images/direct-paste/mapper-template.png)
 
-"Fastener vendor sheet · 8/8 match" means all 8 headers of that template were found in the paste. A template is picked when at least 60% of its headers are there, so a sheet with one extra or one missing column still works.
+See "Fastener vendor sheet · 8/8 match" at the top? All 8 headers from the template were found. It picks a template when at least 60% of its headers are there, so even if the customer adds one extra column or drops one, it still works.
 
-### Step 4: Press OK, and everything is checked first
+### Press OK, and BC checks everything first
 
-This is the part I care about most. When the user presses **OK**, nothing is inserted yet. Every row is first checked against Business Central's own rules, the same `OnValidate` code, the same `Insert(true)`, the same GST Tax Engine subscribers.
+This is the part I care about the most.
 
-If even one row fails, you get **all** the problems with their Excel row numbers, and **nothing is inserted**:
+When the user presses **OK**, nothing gets saved yet. First, every row is checked using Business Central's own rules. Same `OnValidate` code, same `Insert(true)`, same GST Tax Engine. Exactly what would happen if you typed the line by hand.
 
-![Dry run errors listed with row numbers](images/direct-paste/dry-run-errors.png)
+If even one row has a problem, you see **all** the problems together, with the Excel row number, and **nothing is saved**:
 
-The user fixes the sheet (or a default, or a link), pastes again, and presses OK. When every row passes, the lines are inserted.
+![All problems shown together with their row numbers](images/direct-paste/dry-run-errors.png)
 
-So you never end up with "22 lines went in, line 23 failed, now what?"
+The user fixes the sheet, pastes again, presses OK. When every row is clean, then only the lines go in.
+
+You know that situation where 22 lines went in, line 23 failed, and now you have to find out what's in and what's not? That doesn't happen here. It's all or nothing.
 
 ## How it works inside
 
-The extension has two parts, the same pattern as any control add-in:
+Okay, now the developer part. It's two pieces working together, like any control add-in:
 
-- **JavaScript (the control add-in)** does the browser work: reading the clipboard, parsing, auto-mapping, the drag-to-link screen and converting values.
-- **AL** does the Business Central work: field list, dry run, insert, templates and permissions.
+- **JavaScript** does the browser work. Reading the paste, guessing the columns, the drag-and-link screen, and cleaning up the values.
+- **AL** does the Business Central work. Which fields can be filled, checking the rows, saving them, templates and permissions.
 
-### 1. Reading the paste
+### 1. Reading what you pasted
 
-The paste zone is a transparent `textarea`. That's why Ctrl+V, right-click → Paste and long-press on touch all work, with no clipboard permission popup.
+The paste box is actually a see-through `textarea`. Because of that, Ctrl+V works, right-click → Paste works, long-press on a tablet works, and the browser doesn't ask "allow clipboard access?".
 
-When you copy cells, Excel puts **tab-separated text** on the clipboard. Cells that contain a tab, a quote or a line break come with quotes around them. `helper.js` handles those quotes, falls back to comma or semicolon for CSV, removes empty rows and pads short rows. It also guesses whether the first row is a header.
+When you copy cells, Excel puts **tab-separated text** on the clipboard. If a cell has a tab or a line break inside it, Excel wraps it in quotes. `helper.js` takes care of those quotes. If there are no tabs, it tries comma or semicolon (for CSV). It also removes empty rows and guesses whether your first row is a header.
 
-### 2. Auto-mapping
+### 2. Guessing which column goes where
 
-Every Excel header is scored against every field that can be imported. Highest score wins, one column per field, minimum score 58:
+Every Excel header is compared with every field and given a score. The best score wins. One column per field, and anything below 58 is left alone:
 
-| Rule | Score |
+| What matched | Score |
 |---|---|
 | Same header you used last time for this field | 110 |
-| Exact caption match (ignoring case, spaces, dots) | 100 |
-| Exact field name match | 95 |
-| Synonym: Qty, Rate/MRP, UOM, HSN, Godown and more | 85 |
-| Header contains the field's words ("Item Qty") | 60–75 |
-| Word overlap or similar spelling | up to 70 |
+| Exactly the field caption (case, spaces and dots ignored) | 100 |
+| Exactly the field name | 95 |
+| A known short form: Qty, Rate/MRP, UOM, HSN, Godown and more | 85 |
+| Header has the field's words in it ("Item Qty") | 60–75 |
+| Words overlap or spelling is close | up to 70 |
 
-Then the column's data is looked at: numbers going to a Decimal field get +10, text going to a Date field gets −25. Links below 75 are drawn amber so the user checks them.
+Then it also looks at the data in the column. Numbers going to a Decimal field get +10. Text going to a Date field gets −25. Anything below 75 is drawn in orange so the user takes a look.
 
-### 3. Converting values the Indian way
+That synonym list is where the Indian part comes in. "Godown" for location, "Particulars" for description, "Rate" for price. Our sheets talk like this.
 
-Before anything goes to AL, each cell is converted to AL's XML format, so it works the same whatever the user's regional settings are:
+### 3. Handling Indian numbers and dates
 
-- **Numbers:** `1,23,456.50` (lakh grouping), `1,234.50`, `1.234,50`, `(1,000)`, `₹ 450`, `12%`
-- **Dates:** `15-11-2026`, `15/11/2026`, `15.11.26`, `15 Nov 2026`, ISO and Excel serial numbers. Ambiguous dates like `04-05-2026` are read **day first** (4 May), the Indian way.
+Before anything goes to AL, every cell is converted to AL's standard format. So it doesn't matter what regional settings the user has. It understands:
+
+- **Numbers:** `1,23,456.50` (lakh style), `1,234.50`, `1.234,50`, `(1,000)`, `₹ 450`, `12%`
+- **Dates:** `15-11-2026`, `15/11/2026`, `15.11.26`, `15 Nov 2026`, ISO dates, and those Excel serial numbers. And when a date could go both ways, like `04-05-2026`, it reads it **day first**, so 4 May. The Indian way.
 - **Yes/No:** yes, y, true, 1, x
 
-If a value can't be converted, the user sees it in the preview before AL is even called.
+If a value just can't be converted, the user sees it in the preview, before AL is even called.
 
-### 4. The dry run: insert, then roll back on purpose
+### 4. The trick: insert it, then cancel it on purpose
 
-This is the trick I like most. How do you check a row with **all** of Business Central's validation, without saving it?
+This is my favourite part, so let me explain slowly.
 
-You insert it for real, then throw an error on purpose so the platform rolls it back.
+The question was: how do I check a row with **all** of BC's rules, without actually saving it?
 
-The row check codeunit builds the record exactly like the real import and then raises a fixed "sentinel" error:
+The answer: actually insert it, and then throw an error on purpose. When an error happens, BC rolls back everything. So the row goes in, all the validation and tax code runs, and then it's gone.
+
+Here's the codeunit that checks one row. It builds the record exactly like the real import, and at the end it always raises the same fixed error (I call it the "sentinel"):
 
 ```al
 codeunit 87301 "AML Direct Paste Row Check"
@@ -143,7 +153,7 @@ codeunit 87301 "AML Direct Paste Row Check"
 }
 ```
 
-The management codeunit runs it for each row with `if not RowCheck.Run()`:
+And the main codeunit runs it for each row with `if not RowCheck.Run()`:
 
 ```al
 foreach RowToken in Rows do begin
@@ -158,34 +168,36 @@ foreach RowToken in Rows do begin
 end;
 ```
 
-- If the error text is the sentinel, the row is fine.
-- Any other error text is that row's real problem: "You must select an existing item", a missing GST setup, a blocked customer, anything.
+So now there are only two cases:
 
-Because every run ends in a rollback, the insert and any tax records written by subscribers are gone. And because no write transaction stays open, `Codeunit.Run` with a return value is allowed for the next row. (I explained why that matters in my post on [Commit in AL](#/post/2026-10-31-commit-in-al-what-it-really-means).)
+- The error is my sentinel error → the row reached the end → the row is fine.
+- The error is anything else → that's the row's real problem. "You must select an existing item", GST setup missing, customer blocked, whatever it is.
 
-Why not a `[TryFunction]`? Because a TryFunction does **not** roll back database writes. A half-inserted line would stay.
+Every run ends in a rollback, so the line and any tax records are gone. And because nothing is left open, the next `Codeunit.Run` is allowed. (If you're wondering why that matters, I wrote about it in my post on [Commit in AL](#/post/2026-10-31-commit-in-al-what-it-really-means).)
 
-### 5. Building the record in the right order
+People ask me, why not a `[TryFunction]`? Because a TryFunction **doesn't** roll back database changes. If it fails halfway, the half-inserted line stays there. Not what we want.
 
-For each row, `ProcessRow`:
+### 5. Filling the fields in the right order
 
-1. Calls `Init()`.
-2. Sets the context fields from the host page (Document Type, Document No.) without validation.
-3. Numbers **Line No.** automatically: last line + 10000, then +10000 per row.
-4. Validates the mapped and default fields **key fields first, then by field number**. On Sales Line that gives Type → No. → Location Code → Quantity → Unit Price, the same order a user types them.
-5. Calls `Insert(true)`.
+For every row, `ProcessRow` does this:
 
-The real import runs the same `ProcessRow`, with `Commit()` every 100 records using the `mod` pattern.
+1. `Init()`.
+2. Sets the fields that come from the order (Document Type, Document No.), without validation.
+3. Gives the **Line No.** itself: last line + 10000, then +10000 for each row.
+4. Validates the fields **key fields first, then by field number**. On Sales Line that means Type → No. → Location Code → Quantity → Unit Price. That's the same order you'd type them on the page, which matters, because Quantity needs No. to be there first.
+5. `Insert(true)`.
 
-### 6. Security
+The real import uses this same `ProcessRow`, and does a `Commit()` every 100 records with the usual `mod` pattern.
 
-The add-in only offers normal, enabled, non-obsolete fields. AL checks every field number again when the data comes back, so even a tampered payload can't write to FlowFields, system fields, the context fields or Line No.
+### 6. Keeping it safe
 
-## Put it on your own page
+The add-in only shows normal, enabled fields that aren't obsolete. And when the data comes back, AL checks every field number again. So even if someone messes with the data in the browser, they can't write into FlowFields, system fields, the order fields or Line No.
 
-The engine is generic. It works on any table through `RecordRef`. The host page only decides two things: the target table, and which fields the header fixes.
+## Want it on your own page?
 
-This is the Sales Order example from the repo:
+The engine doesn't care which table it is. It works with `RecordRef`, so any table works. Your page only tells it two things: which table to fill, and which fields are already decided by the header.
+
+Here's the Sales Order example from the repo:
 
 ```al
 pageextension 87300 "AML Sales Order Direct Paste" extends "Sales Order"
@@ -221,31 +233,39 @@ pageextension 87300 "AML Sales Order Direct Paste" extends "Sales Order"
 }
 ```
 
-For a Purchase Order, change the table to Purchase Line. For an Item Journal, the context is Journal Template Name and Journal Batch Name. Line No. is numbered for you.
+Want it on a Purchase Order? Change it to Purchase Line. On an Item Journal? The context becomes Journal Template Name and Journal Batch Name. Line No. is handled for you either way.
 
 ## How to install it
 
 1. Clone [the repo](https://github.com/anilkcs001/DirectPaste) and open the folder in VS Code with the AL Language extension.
-2. Change the object IDs (87300–87304) to your own range if they clash.
-3. Download symbols for your sandbox and publish (F5).
-4. Assign the permission set **AML Direct Paste** to users. They still need their normal insert rights on Sales Line. Direct Paste doesn't give extra rights.
-5. Open a Sales Order with status Open, paste, check, press OK.
+2. If the object IDs (87300–87304) clash with yours, change them.
+3. Download symbols for your sandbox and press F5.
+4. Give users the permission set **AML Direct Paste**. They still need their normal rights to insert Sales Lines. Direct Paste doesn't give anyone extra rights.
+5. Open a Sales Order with status Open, paste something, check it, press OK.
 
-It needs only Base Application and System Application (v25). No Azure, no external API, nothing leaves Business Central.
+It only needs the Base Application and System Application (v25). No Azure, no outside API. Your data never leaves Business Central.
 
-## Things to know before you use it
+## Things you should know
 
-- **FactBox refresh.** A FactBox can't refresh its host page, so after a paste from the FactBox, the new lines show when the page refreshes. The **Direct Paste Lines** action on the Sales Order opens the same mapper and refreshes the page after.
-- **Speed.** Every row is inserted and rolled back once in the dry run, including tax calculation. A few hundred lines take seconds; several thousand can take minutes.
-- **Confirm dialogs.** If a field validation asks a question, it will interrupt the dry run. Map or default fields so the question doesn't come up.
-- **Limits.** 5,000 rows and 200 columns per paste. Only plain text is read, so Excel formulas come as their displayed values. `.xlsx` files can't be dropped; copy the cells instead.
-- **Test it in a sandbox first.** It's a PTE, and it's built for BC 2024 release wave 2 (v25) with the India localisation in mind. Please try it on your version before production.
+I don't want to oversell it, so here are the limits:
 
-## Wrapping up
+- **The page doesn't refresh by itself.** A FactBox can't refresh the page it sits on. So after pasting from the FactBox, the new lines show up when the page refreshes. If you use the **Direct Paste Lines** action on the Sales Order instead, it opens the same screen and refreshes the page after.
+- **Big pastes take time.** Every row is inserted and rolled back once during the check, tax calculation included. A few hundred lines take seconds. A few thousand can take minutes.
+- **Confirm popups get in the way.** If a field's validation asks the user a question, it will interrupt the check. Map or default your fields so the question doesn't come up.
+- **Limits.** 5,000 rows and 200 columns per paste. Only plain text is read, so Excel formulas come in as their values. You can't drop an `.xlsx` file. Just copy the cells instead.
+- **Try it in a sandbox first.** It's a PTE built for BC 2024 release wave 2 (v25), with India localisation in mind. Please test it on your version before putting it in production.
 
-Direct Paste solves a small problem, but it's one users meet every single day. The parts I'd reuse in other projects are the **dry run with a sentinel error** (full validation without saving) and the **auto-mapping score** (users hate mapping screens, so do most of it for them).
+## How I built it
 
-The code is on GitHub under the MIT licence: **[anilkcs001/DirectPaste](https://github.com/anilkcs001/DirectPaste)**. If you try it, please open an issue or a pull request, especially if your sheets have headers my synonym list doesn't know yet.
+I'll be honest about this: I used AI (Claude) as my coding partner on this project. What to build, and how it should behave for Indian users, was my call. I reviewed the code, tested it in my own BC sandbox, and fixed the issues that came up there, like the FactBox staying blank, a List error in sorting, and making the error messages clearer. AI made it faster, but every design decision and every test was mine. I really think this is how a lot of BC development is going to look from now on.
+
+## That's it
+
+Direct Paste solves a small problem. But it's a problem users hit every single day, and small daily pain is the kind people remember.
+
+If you only take two ideas from this post for your own work, take these. The **insert-and-cancel trick**, to check a record with full validation without saving it. And **guess the mapping for the user**, because nobody likes filling mapping screens.
+
+The code is here: **[anilkcs001/DirectPaste](https://github.com/anilkcs001/DirectPaste)**. If you try it, tell me how it went. Open an issue or send a pull request, especially if your sheets have headers my synonym list doesn't know yet. I'd love to add them.
 
 ## Sources
 

@@ -297,13 +297,13 @@
     return items.map(cardHtml).join('');
   }
 
-  // "Download CV" button, shown when S.resume.url is set in config.js
+  // "View CV" button, shown when S.resume.url is set in config.js. Opens the PDF in a new browser tab.
   function cvLink(extraClass) {
     const r = S.resume || {};
     if (!r.url) return '';
-    const label = r.label || 'Download CV';
-    return `<a class="pill-link cv-link ${extraClass || ''}" href="${esc(r.url)}" download target="_blank" rel="noopener">` +
-      `<span aria-hidden="true">⤓</span> ${esc(label)}</a>`;
+    const label = r.label || 'View CV';
+    return `<a class="pill-link cv-link ${extraClass || ''}" href="${esc(r.url)}" target="_blank" rel="noopener">` +
+      `${esc(label)} <span aria-hidden="true">↗</span></a>`;
   }
 
   function renderHome() {

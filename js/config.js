@@ -40,11 +40,11 @@ window.SITE = {
 },
   // ---------- About page ----------
 
-  // Your CV for the "Download CV" buttons (home and About). Put the PDF in the /files folder.
+  // Your CV for the "View CV" buttons (home and About). It opens in the browser. Put the PDF in the /files folder.
   // Leave url empty to hide the buttons.
   resume: {
     url: 'files/Anil-Kumar-Paidimukkala-BC-Technical-Consultant.pdf',
-    label: 'Download CV'
+    label: 'View CV'
   },
 
   summary: [

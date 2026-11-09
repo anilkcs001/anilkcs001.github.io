@@ -42,7 +42,7 @@ window.SITE = {
   // Sign up at https://www.goatcounter.com, pick a code (for example "anilkcs001"),
   // and put that code here. Leave it empty to turn counting off.
   // Your stats are then at https://<code>.goatcounter.com
-  goatcounter: '',
+  goatcounter: 'anilkcs001',
 
   // ---------- About page ----------
 

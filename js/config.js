@@ -38,6 +38,12 @@ window.SITE = {
   category: 'Q&A',
   categoryId: 'DIC_kwDOVPCHjc4DJq1g'
 },
+  // ---------- Visitor counter (GoatCounter, free, no cookies) ----------
+  // Sign up at https://www.goatcounter.com, pick a code (for example "anilkcs001"),
+  // and put that code here. Leave it empty to turn counting off.
+  // Your stats are then at https://<code>.goatcounter.com
+  goatcounter: '',
+
   // ---------- About page ----------
 
   // Your CV for the "View CV" buttons (home and About). It opens in the browser. Put the PDF in the /files folder.

@@ -639,8 +639,30 @@
     renderNotFound();
   }
 
+  /* ---------- Visitor counter (GoatCounter) ---------- */
+  // Counts one view per page: the home page, About, and each post (#/post/slug).
+  // Off when S.goatcounter is empty. GoatCounter ignores visits from localhost.
+  function setupAnalytics() {
+    const code = (S.goatcounter || '').trim();
+    if (!/^[a-z0-9-]+$/i.test(code)) return;
+    window.goatcounter = { no_onload: true };
+    const count = () => {
+      if (!window.goatcounter || !window.goatcounter.count) return;
+      const path = (location.hash || '#/').replace(/^#/, '') || '/';
+      window.goatcounter.count({ path: path, title: document.title });
+    };
+    const tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://gc.zgo.at/count.js';
+    tag.setAttribute('data-goatcounter', 'https://' + code + '.goatcounter.com/count');
+    tag.addEventListener('load', () => setTimeout(count, 300));
+    document.head.appendChild(tag);
+    window.addEventListener('hashchange', () => setTimeout(count, 300));
+  }
+
   async function init() {
     setupShell();
+    setupAnalytics();
     try {
       const res = await fetch('posts/posts.json', { cache: 'no-cache' });
       if (!res.ok) throw new Error(res.status);

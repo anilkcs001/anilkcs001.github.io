@@ -105,15 +105,16 @@ Code blocks tagged `al` are coloured using the Delphi/Pascal grammar, the closes
 
 Open `#/admin` (for example `https://anilkcs001.github.io/#/admin`). It is not linked anywhere on the site.
 
-1. In GoatCounter go to Settings, API, and create a token with **Read statistics** only.
-2. Paste it into the Connect box. Optionally paste a GitHub token (public repositories, no extra permissions) to see comment counts per post.
-3. The tokens are kept in your own browser only (localStorage). Use **Sign out** to remove them. Never put a token in the repo.
+GoatCounter does not allow its API to be called from web pages, so a GitHub Action does it instead. It runs every 3 hours, reads GoatCounter and the comment counts from GitHub Discussions, and saves the result in `data/stats.json`. The admin page only reads that file.
 
-You see visitors per day, posts ranked by views, where visitors come from, countries, browsers, and a table of views and comments for every post. Views of the admin page are not counted.
+Set up once:
+1. GoatCounter: username menu, **API**, create a token with **Read statistics** only.
+2. GitHub repository: Settings, Secrets and variables, Actions, **New repository secret**. Name `GOATCOUNTER_TOKEN`, value the token.
+3. Actions tab, **Update blog stats**, **Run workflow**.
 
-This is not a password. The site is static, so anyone can open `#/admin`, but they only see the Connect box; the numbers stay behind GoatCounter's own login.
+You see visitors per day, posts ranked by views, where visitors come from, countries, browsers, and views and comments for every post. Views of the admin page are not counted. The workflow adds a small "Update blog stats" commit when the numbers change.
 
-If the browser reports that GoatCounter could not be reached even with a correct token, GoatCounter is blocking its API from web pages. Tell Claude and a scheduled GitHub Action can fetch the stats into a file instead.
+Note: `data/stats.json` is public because the site is public. It holds only totals (views per page, referrers, countries, browsers, comment counts), nothing personal.
 
 ## Licence
 

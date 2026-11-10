@@ -54,3 +54,6 @@
   .ad-two { grid-template-columns: 1fr; }
   .ad-box { margin: 16px auto; padding: 20px; }
 }
+
+.ad-steps { padding-left: 20px; line-height: 1.7; }
+.ad-steps code { background: var(--inline-code); padding: 1px 6px; border-radius: 6px; }

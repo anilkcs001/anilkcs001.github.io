@@ -115,7 +115,7 @@
 
     return `<section class="ad-head">
         <div><h1>Admin</h1><p class="muted">Last ${d.days} days · updated ${esc(ago(d.generated))}</p></div>
-        <div class="ad-actions"><div class="ad-ranges">${rangeBtns}</div></div>
+        <div class="ad-actions"><div class="ad-ranges">${rangeBtns}</div><a class="pill-link" id="ad-refresh" target="_blank" rel="noopener" href="https://github.com/${esc((S.comments && S.comments.repo) || 'anilkcs001/anilkcs001.github.io')}/actions/workflows/stats.yml" title="Opens GitHub: tap Run workflow, wait about a minute, then reload this page">Refresh now ↗</a></div>
       </section>
       <div class="ad-stats">
         <div class="stat"><b>${nf(visitors)}</b><span>Page views</span></div>

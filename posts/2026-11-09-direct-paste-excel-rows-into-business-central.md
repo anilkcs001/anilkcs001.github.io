@@ -137,7 +137,7 @@ The answer: actually insert it, and then throw an error on purpose. When an erro
 Here's the codeunit that checks one row. It builds the record exactly like the real import, and at the end it always raises the same fixed error (I call it the "sentinel"):
 
 ```al
-codeunit 87301 "AML Direct Paste Row Check"
+codeunit 87301 "AK Direct Paste Row Check"
 {
     Access = Internal;
 
@@ -200,13 +200,13 @@ The engine doesn't care which table it is. It works with `RecordRef`, so any tab
 Here's the Sales Order example from the repo:
 
 ```al
-pageextension 87300 "AML Sales Order Direct Paste" extends "Sales Order"
+pageextension 87300 "AK Sales Order Direct Paste" extends "Sales Order"
 {
     layout
     {
         addfirst(factboxes)
         {
-            part(AMLDirectPaste; "AML Direct Paste FactBox") { ApplicationArea = All; }
+            part(AKDirectPaste; "AK Direct Paste FactBox") { ApplicationArea = All; }
         }
     }
 
@@ -215,13 +215,13 @@ pageextension 87300 "AML Sales Order Direct Paste" extends "Sales Order"
         Context: Dictionary of [Integer, Text];
     begin
         GetDirectPasteContext(Context);
-        CurrPage.AMLDirectPaste.Page.SetContext(Database::"Sales Line", Context);
+        CurrPage.AKDirectPaste.Page.SetContext(Database::"Sales Line", Context);
     end;
 
     local procedure GetDirectPasteContext(var Context: Dictionary of [Integer, Text])
     var
         SalesLine: Record "Sales Line";
-        DirectPasteMgt: Codeunit "AML Direct Paste Mgt.";
+        DirectPasteMgt: Codeunit "AK Direct Paste Mgt.";
         RecRef: RecordRef;
     begin
         SalesLine."Document Type" := Rec."Document Type";
@@ -240,7 +240,7 @@ Want it on a Purchase Order? Change it to Purchase Line. On an Item Journal? The
 1. Clone [the repo](https://github.com/anilkcs001/DirectPaste) and open the folder in VS Code with the AL Language extension.
 2. If the object IDs (87300–87304) clash with yours, change them.
 3. Download symbols for your sandbox and press F5.
-4. Give users the permission set **AML Direct Paste**. They still need their normal rights to insert Sales Lines. Direct Paste doesn't give anyone extra rights.
+4. Give users the permission set **AK Direct Paste**. They still need their normal rights to insert Sales Lines. Direct Paste doesn't give anyone extra rights.
 5. Open a Sales Order with status Open, paste something, check it, press OK.
 
 It only needs the Base Application and System Application (version 28). No Azure, no outside API. Your data never leaves Business Central.

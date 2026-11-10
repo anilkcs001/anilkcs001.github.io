@@ -703,7 +703,7 @@
     const count = () => {
       if (!window.goatcounter || !window.goatcounter.count) return;
       const path = (location.hash || '#/').replace(/^#/, '') || '/';
-      if (path.indexOf('/admin') === 0) return; // the private stats page is not a view
+      if (path.indexOf('/admin') === 0 || path.indexOf('/toggle-goatcounter') === 0) return; // the private stats page is not a view
       window.goatcounter.count({ path: path, title: document.title });
     };
     const tag = document.createElement('script');

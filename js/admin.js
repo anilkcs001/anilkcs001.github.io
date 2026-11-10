@@ -93,12 +93,12 @@
 
     const rows = new Map();
     posts.forEach((p) => rows.set(p.slug, { slug: p.slug, title: p.title, date: p.date, views: 0, comments: d.comments ? ((d.comments[p.slug] || {}).count || 0) : null, curl: d.comments && d.comments[p.slug] ? d.comments[p.slug].url : '' }));
-    let otherViews = 0;
+    let otherViews = 0, postViews = 0;
     (d.hits.hits || []).forEach((h) => {
       const m = /^\/post\/([^/?#]+)/.exec(h.path || '');
       const slug = m ? decodeURIComponent(m[1]) : null;
-      if (slug && rows.has(slug)) rows.get(slug).views += h.count || 0;
-      else if (!slug) otherViews += h.count || 0;
+      if (slug && rows.has(slug)) { rows.get(slug).views += h.count || 0; postViews += h.count || 0; }
+      else otherViews += h.count || 0;
     });
     const list = Array.from(rows.values()).sort((a, b) => b.views - a.views || (b.date || '').localeCompare(a.date || ''));
     const totalComments = d.comments ? list.reduce((a, r) => a + (r.comments || 0), 0) : null;
@@ -118,7 +118,7 @@
         <div class="ad-actions"><div class="ad-ranges">${rangeBtns}</div></div>
       </section>
       <div class="ad-stats">
-        <div class="stat"><b>${nf(visitors)}</b><span>Visitors</span></div>
+        <div class="stat"><b>${nf(visitors)}</b><span>Page views</span></div>
         <div class="stat"><b>${nf(list.filter((r) => r.views).length)}</b><span>Posts read</span></div>
         <div class="stat"><b>${totalComments == null ? '—' : nf(totalComments)}</b><span>Comments</span></div>
       </div>
@@ -127,7 +127,7 @@
       <div class="ad-two">
         <section class="ad-card"><h2>Posts by views</h2>
           ${barList(list.filter((r) => r.views).slice(0, 12).map((r) => ({ name: r.title, value: r.views, href: '#/post/' + encodeURIComponent(r.slug) })), 'No post views in this period.')}
-          ${otherViews ? `<p class="muted ad-foot">Home, About and other pages: ${nf(otherViews)}</p>` : ''}</section>
+          <p class="muted ad-foot">Posts ${nf(postViews)} + home, About and other pages ${nf(otherViews)} = ${nf(postViews + otherViews)} page views</p></section>
         <section class="ad-card"><h2>Where visitors come from</h2>${barList(refs, 'No referrer data.')}
           <h2 class="ad-sub">Countries</h2>${barList(places, 'No location data.')}
           <h2 class="ad-sub">Browsers</h2>${barList(brs, 'No browser data.')}</section>

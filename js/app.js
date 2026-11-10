@@ -672,7 +672,7 @@
   // Needs "Allow adding visitor counts on your website" switched on in GoatCounter settings.
   // GoatCounter caches these numbers for up to a few hours, so they lag a little behind.
   const viewCache = {};
-  // Preferred source: data/stats.json, saved by the GitHub Action every 3 hours (last 90 days).
+  // Preferred source: data/stats.json, saved by the GitHub Action every 30 minutes (last 90 days).
   // Fallback: GoatCounter's public counter (cached up to 4 hours by GoatCounter).
   let statsFile = null;
   function loadStatsFile() {

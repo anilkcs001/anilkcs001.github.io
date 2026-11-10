@@ -2,7 +2,7 @@ name: Update blog stats
 
 on:
   schedule:
-    - cron: '17 */3 * * *'   # every 3 hours
+    - cron: '7,37 * * * *'    # every 30 minutes
   workflow_dispatch:          # lets you run it by hand from the Actions tab
 
 permissions:

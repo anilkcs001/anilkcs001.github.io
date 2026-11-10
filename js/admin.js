@@ -83,7 +83,7 @@
         <li>In your GitHub repository go to Settings → Secrets and variables → Actions → <b>New repository secret</b>. Name it <code>GOATCOUNTER_TOKEN</code> and paste the token.</li>
         <li>Open the <b>Actions</b> tab → <b>Update blog stats</b> → <b>Run workflow</b>.</li>
       </ol>
-      <p class="muted ad-help">After that the numbers refresh by themselves every 3 hours.</p>
+      <p class="muted ad-help">After that the numbers refresh by themselves every 30 minutes.</p>
     </section>`;
   }
 

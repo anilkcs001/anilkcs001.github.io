@@ -105,7 +105,7 @@ Code blocks tagged `al` are coloured using the Delphi/Pascal grammar, the closes
 
 Open `#/admin` (for example `https://anilkcs001.github.io/#/admin`). It is not linked anywhere on the site.
 
-GoatCounter does not allow its API to be called from web pages, so a GitHub Action does it instead. It runs every 3 hours, reads GoatCounter and the comment counts from GitHub Discussions, and saves the result in `data/stats.json`. The admin page only reads that file.
+GoatCounter does not allow its API to be called from web pages, so a GitHub Action does it instead. It runs every 30 minutes, reads GoatCounter and the comment counts from GitHub Discussions, and saves the result in `data/stats.json`. The admin page only reads that file.
 
 Set up once:
 1. GoatCounter: username menu, **API**, create a token with **Read statistics** only.

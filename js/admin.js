@@ -117,12 +117,12 @@
         <div><h1>Admin</h1><p class="muted">Last ${d.days} days · updated ${esc(ago(d.generated))}</p></div>
         <div class="ad-actions"><div class="ad-ranges">${rangeBtns}</div></div>
       </section>
-      <div class="stat-row">
+      <div class="ad-stats">
         <div class="stat"><b>${nf(visitors)}</b><span>Visitors</span></div>
         <div class="stat"><b>${nf(list.filter((r) => r.views).length)}</b><span>Posts read</span></div>
         <div class="stat"><b>${totalComments == null ? '—' : nf(totalComments)}</b><span>Comments</span></div>
-        <div class="stat"><b class="ad-small">${top ? esc(top.title) : '—'}</b><span>Most read${top ? ' · ' + nf(top.views) : ''}</span></div>
       </div>
+      ${top ? `<a class="ad-top" href="#/post/${encodeURIComponent(top.slug)}"><span>Most read</span><b>${esc(top.title)}</b><em>${nf(top.views)} views</em></a>` : ''}
       <section class="ad-card"><h2>Visitors per day</h2>${days.length ? lineChart(days) : '<p class="muted">No data for this period yet.</p>'}</section>
       <div class="ad-two">
         <section class="ad-card"><h2>Posts by views</h2>

@@ -57,3 +57,40 @@
 
 .ad-steps { padding-left: 20px; line-height: 1.7; }
 .ad-steps code { background: var(--inline-code); padding: 1px 6px; border-radius: 6px; }
+
+/* ---- tidy-up: layout that holds at any width ---- */
+.ad-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+.ad-stats .stat { padding: 14px 16px; }
+.ad-stats .stat b { font-size: 1.7rem; }
+.ad-top { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 14px; align-items: center; margin-top: 12px; padding: 14px 18px; border-radius: var(--radius-sm, 14px); border: 1px solid var(--line); background: var(--glass-hi); text-decoration: none; color: var(--text); }
+.ad-top:hover { border-color: var(--accent); }
+.ad-top span { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-family: var(--font-mono); }
+.ad-top b { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ad-top em { font-style: normal; font-family: var(--font-mono); color: var(--accent); font-size: .9rem; white-space: nowrap; }
+.ad-two { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+.ad-card { padding: 18px 20px; }
+.ad-card h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-family: var(--font-mono); font-weight: 600; }
+.ad-card h2.ad-sub { margin-top: 24px; }
+.ad-bar { height: 5px; }
+.ad-bar i { background: var(--accent); }
+.ad-bar-top { font-size: .86rem; }
+.ad-table td:first-child { padding-right: 16px; }
+@media (max-width: 1000px) {
+  .ad-two { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .ad-stats { gap: 8px; }
+  .ad-stats .stat { padding: 12px; }
+  .ad-stats .stat b { font-size: 1.35rem; }
+  .ad-top { grid-template-columns: minmax(0, 1fr) auto; }
+  .ad-top span { grid-column: 1 / -1; }
+  .ad-card { padding: 16px; }
+  .ad-head { align-items: flex-start; }
+}
+.ad-bars { grid-template-columns: minmax(0, 1fr); }
+.ad-bars li { min-width: 0; }
+.ad-bar-top { min-width: 0; }
+.ad-bar-name { flex: 1 1 auto; }
+.ad-bar-top b { flex: none; }
+.ad-axis { font-size: 13px; }
+@media (max-width: 560px) { .ad-axis { font-size: 16px; } }

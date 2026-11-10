@@ -672,15 +672,36 @@
   // Needs "Allow adding visitor counts on your website" switched on in GoatCounter settings.
   // GoatCounter caches these numbers for up to a few hours, so they lag a little behind.
   const viewCache = {};
-  function fetchViews(path) {
+  // Preferred source: data/stats.json, saved by the GitHub Action every 3 hours (last 90 days).
+  // Fallback: GoatCounter's public counter (cached up to 4 hours by GoatCounter).
+  let statsFile = null;
+  function loadStatsFile() {
+    if (!statsFile) {
+      statsFile = fetch('data/stats.json', { cache: 'no-cache' })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((j) => (j && j.ranges && j.ranges['90'] ? j.ranges['90'] : null))
+        .catch(() => null);
+    }
+    return statsFile;
+  }
+  function publicCounter(path) {
     const code = (S.goatcounter || '').trim();
     if (!/^[a-z0-9-]+$/i.test(code)) return Promise.resolve(null);
+    const p = path === 'TOTAL' ? 'TOTAL' : encodeURIComponent(path);
+    return fetch('https://' + code + '.goatcounter.com/counter/' + p + '.json')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => (j && j.count ? String(j.count) : null))
+      .catch(() => null);
+  }
+  function fetchViews(path) {
     if (!viewCache[path]) {
-      const p = path === 'TOTAL' ? 'TOTAL' : encodeURIComponent(path);
-      viewCache[path] = fetch('https://' + code + '.goatcounter.com/counter/' + p + '.json')
-        .then((r) => (r.ok ? r.json() : null))
-        .then((j) => (j && j.count ? String(j.count) : null))
-        .catch(() => null);
+      viewCache[path] = loadStatsFile().then((d) => {
+        if (!d) return publicCounter(path);
+        let n;
+        if (path === 'TOTAL') n = d.total && (d.total.total_utc != null ? d.total.total_utc : d.total.total);
+        else n = ((d.hits && d.hits.hits) || []).filter((h) => h.path === path).reduce((a, h) => a + (h.count || 0), 0);
+        return n ? String(n) : null;
+      });
     }
     return viewCache[path];
   }

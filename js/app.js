@@ -628,6 +628,31 @@
     app.innerHTML = '<div class="empty"><h2>Page not found</h2><p><a href="#/">← Back to all posts</a></p></div>';
   }
 
+  /* ---------- Private analytics page (#/admin, not linked anywhere) ---------- */
+  function loadOnce(tag, attrs) {
+    return new Promise((resolve, reject) => {
+      const el = document.createElement(tag);
+      Object.keys(attrs).forEach((k) => { el[k] = attrs[k]; });
+      el.onload = resolve; el.onerror = reject;
+      document.head.appendChild(el);
+    });
+  }
+  async function renderAdmin() {
+    const token = routeToken;
+    setTitle('Admin'); setActiveNav('');
+    app.innerHTML = '<p class="muted" style="text-align:center;padding:80px 0">Loading…</p>';
+    try {
+      if (!window.BlogAdmin) {
+        await Promise.all([
+          loadOnce('link', { rel: 'stylesheet', href: 'css/admin.css' }),
+          loadOnce('script', { src: 'js/admin.js' })
+        ]);
+      }
+    } catch (e) { return renderNotFound(); }
+    if (token !== routeToken) return;
+    window.BlogAdmin.render(app, { S, posts: state.posts });
+  }
+
   /* ---------- Router ---------- */
 
   function route() {
@@ -638,6 +663,7 @@
     document.body.classList.toggle('reading', page === 'post');
     if (page === '') return renderHome();
     if (page === 'about') return renderAbout();
+    if (page === 'admin') return renderAdmin();
     if (page === 'post' && parts[1]) return renderPost(decodeURIComponent(parts[1]));
     renderNotFound();
   }
@@ -677,6 +703,7 @@
     const count = () => {
       if (!window.goatcounter || !window.goatcounter.count) return;
       const path = (location.hash || '#/').replace(/^#/, '') || '/';
+      if (path.indexOf('/admin') === 0) return; // the private stats page is not a view
       window.goatcounter.count({ path: path, title: document.title });
     };
     const tag = document.createElement('script');

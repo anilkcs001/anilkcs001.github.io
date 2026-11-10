@@ -101,6 +101,20 @@ Code blocks tagged `al` are coloured using the Delphi/Pascal grammar, the closes
         "readingTime": 16
     }
 
+## Private analytics page
+
+Open `#/admin` (for example `https://anilkcs001.github.io/#/admin`). It is not linked anywhere on the site.
+
+1. In GoatCounter go to Settings, API, and create a token with **Read statistics** only.
+2. Paste it into the Connect box. Optionally paste a GitHub token (public repositories, no extra permissions) to see comment counts per post.
+3. The tokens are kept in your own browser only (localStorage). Use **Sign out** to remove them. Never put a token in the repo.
+
+You see visitors per day, posts ranked by views, where visitors come from, countries, browsers, and a table of views and comments for every post. Views of the admin page are not counted.
+
+This is not a password. The site is static, so anyone can open `#/admin`, but they only see the Connect box; the numbers stay behind GoatCounter's own login.
+
+If the browser reports that GoatCounter could not be reached even with a correct token, GoatCounter is blocking its API from web pages. Tell Claude and a scheduled GitHub Action can fetch the stats into a file instead.
+
 ## Licence
 
 - **Code** (`index.html`, `js/`, `css/`, `tools/`): MIT License, see [LICENSE](LICENSE).

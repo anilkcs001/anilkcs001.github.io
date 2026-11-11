@@ -355,5 +355,20 @@
         ],
         "summary": "I built a small free tool called Direct Paste. You copy rows from Excel, paste them in Business Central, check the columns once, and BC checks every row before saving anything. Here's how it looks and how I made it work.",
         "readingTime": 14
+    },
+    {
+        "slug": "2026-11-11-unique-secondary-keys-in-al",
+        "title": "Unique = true on a secondary key: what it does, and how I found it by accident",
+        "date": "2026-11-11",
+        "type": "concept",
+        "tags": [
+            "AL",
+            "Keys",
+            "Tables",
+            "Data Validation",
+            "Business Central"
+        ],
+        "summary": "My table's primary key was Entry No., but BC still refused to insert the same record twice. The reason was one line I hadn't noticed, Unique = true on a secondary key. Here's what it does, how it differs from the primary key, and why it beats the usual SetRange + FindFirst + Error check.",
+        "readingTime": 8
     }
 ]

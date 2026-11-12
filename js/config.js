@@ -122,7 +122,7 @@ window.SITE = {
           name: 'Finance Integration Project (Logistics)',
           duration: 'Sep 2026 – Present',
           bullets: [
-            'Built the inbound integration: an external TMS sends Customer, Vendor, AP and AR data through OData V4 (single-record and $batch) with OAuth 2.0 into staging tables that are validated and posted. 100 vendors are checked and created in about 7 seconds.',
+            'Built the inbound integration: an external system sends Customer, Vendor, AP and AR data through OData V4 (single-record and $batch) with OAuth 2.0 into staging tables that are validated and posted. 100 vendors are checked and created in about 7 seconds.',
             'Implemented the posting callback: BC sends POSTED / FAILED with document number, batch and status message; failures go first and a posting is never sent twice.',
             'Designed error handling: errors are checked once up front, failed records are corrected and re-uploaded, and retry with exponential back-off covers 429, 500 and timeouts. A job queue every 5 minutes posts 100 records in about a minute.',
             'Tested parallel API calls (500 records in about 10 seconds), integrated the Payment Receipt API and wrote the integration guides.'

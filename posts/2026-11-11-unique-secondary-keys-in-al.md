@@ -44,12 +44,12 @@ If the key has more than one field, it's the **combination** that must be unique
 
 | Entry No. | Source System | External Document No. | Result |
 |---|---|---|---|
-| 1 | TMS | INV-1001 | Inserted |
-| 2 | TMS | INV-1002 | Inserted |
+| 1 | WEBSHOP | INV-1001 | Inserted |
+| 2 | WEBSHOP | INV-1002 | Inserted |
 | 3 | ERP2 | INV-1001 | Inserted (different source system) |
-| 4 | TMS | INV-1001 | **Error, not inserted** |
+| 4 | WEBSHOP | INV-1001 | **Error, not inserted** |
 
-Row 4 has a brand-new Entry No., so the primary key is happy. But `TMS + INV-1001` already exists, so the unique key stops it. That's my "duplicate" error.
+Row 4 has a brand-new Entry No., so the primary key is happy. But `WEBSHOP + INV-1001` already exists, so the unique key stops it. That's my "duplicate" error.
 
 ## So is it like a second primary key?
 
@@ -64,11 +64,11 @@ That's what I thought at first, but no. It **protects against duplicates like a 
 | Clustered (decides the physical order) | Yes, by default | No |
 | Allowed in a table extension | Not applicable | **No**, `Unique` isn't supported in table extensions |
 
-The `Get()` one surprises people. You can't do `Rec.Get('TMS', 'INV-1001')` with a unique secondary key. `Get` always takes the primary key values. To find a record by the unique key, filter on it:
+The `Get()` one surprises people. You can't do `Rec.Get('WEBSHOP', 'INV-1001')` with a unique secondary key. `Get` always takes the primary key values. To find a record by the unique key, filter on it:
 
 ```al
 Staging.SetCurrentKey("Source System", "External Document No.");
-Staging.SetRange("Source System", 'TMS');
+Staging.SetRange("Source System", 'WEBSHOP');
 Staging.SetRange("External Document No.", 'INV-1001');
 if Staging.FindFirst() then
     // found it

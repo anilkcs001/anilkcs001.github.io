@@ -370,5 +370,20 @@
         ],
         "summary": "My table's primary key was Entry No., but BC still refused to insert the same record twice. The reason was one line I hadn't noticed, Unique = true on a secondary key. Here's what it does, how it differs from the primary key, and why it beats the usual SetRange + FindFirst + Error check.",
         "readingTime": 8
+    },
+    {
+        "slug": "2026-11-12-why-entry-no-skips-numbers-autoincrement",
+        "title": "Why does my Entry No. skip numbers? AutoIncrement gaps, explained",
+        "date": "2026-11-12",
+        "type": "concept",
+        "tags": [
+            "AL",
+            "Keys",
+            "Tables",
+            "AutoIncrement",
+            "Business Central"
+        ],
+        "summary": "Entry No. goes 1, 2, 3, 4, 5, then 7. Nobody deleted number 6. AutoIncrement is designed to leave gaps, and once you know why, you'll know when it's the right choice and when you need something else.",
+        "readingTime": 8
     }
 ]

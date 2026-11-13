@@ -385,5 +385,20 @@
         ],
         "summary": "Entry No. goes 1, 2, 3, 4, 5, then 7. Nobody deleted number 6. AutoIncrement is designed to leave gaps, and once you know why, you'll know when it's the right choice and when you need something else.",
         "readingTime": 8
+    },
+    {
+        "slug": "2026-11-13-dimensions-and-dimension-set-id-explained",
+        "title": "Dimensions in Business Central: how one Dimension Set ID holds all your dimensions",
+        "date": "2026-11-13",
+        "type": "concept",
+        "tags": [
+            "Dimensions",
+            "Finance",
+            "AL",
+            "DimensionManagement",
+            "Business Central"
+        ],
+        "summary": "Every posted entry in BC carries just one number for all its dimensions, the Dimension Set ID. Same combination, same number, every time, in any order. I'll explain what dimensions are, how BC finds that number using a small \"notebook\" table, and how to work with dimensions in AL.",
+        "readingTime": 15
     }
 ]

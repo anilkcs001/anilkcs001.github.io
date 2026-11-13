@@ -226,6 +226,19 @@ It tells BC "when you loop through these rows, give them sorted by Dimension Val
 
 And just think what would happen without sorting. One user would go P100 → SOUTH → RETAIL and create a new set. Another would go SOUTH → RETAIL → P100 and create another new set. Now the same combination would have three different numbers, and reports would show it as three different rows. That's why the sorting is so important.
 
+## Try it yourself: a small walk game
+
+To make this simple to understand, I made a small HTML page. In it, a little explorer carries your dimension values in a backpack and walks from house to house. Every house is a set, and every road means "add one more value".
+
+- Pick values in any order, put them in the backpack, and press **Go!**
+- Watch the explorer line up the cards by token number first, then ask at every house, "is there a road for this value from here?"
+- If the road is there, it just walks. If not, it builds a new road and a new house, and SQL Server gives it the next set number.
+- You can add your own values, start from an empty town (only Set 0), and pause the walk anytime.
+
+**[Open the Dimension Set walk game](demos/dimension-set-tree-lab.html)**
+
+Try the same values in a different order. You'll see the explorer take the exact same road every time.
+
 ## How does BC know "it's not there" so fast?
 
 The notebook's primary key is **Parent Dimension Set ID + Dimension Value ID** (At set + Add token), and it's the clustered key. That means SQL Server always keeps the lines **sorted** by these two columns, like words in a dictionary.

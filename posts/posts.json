@@ -400,5 +400,20 @@
         ],
         "summary": "Every posted entry in BC carries just one number for all its dimensions, the Dimension Set ID. Same combination, same number, every time, in any order. I'll explain what dimensions are, how BC finds that number using a small \"notebook\" table, and how to work with dimensions in AL.",
         "readingTime": 15
+    },
+    {
+        "slug": "2026-11-23-api-timeouts-staging-table-job-queue-retries",
+        "title": "Don't post inside the API call: staging table, job queue and retries in Business Central",
+        "date": "2026-11-23",
+        "type": "issue",
+        "tags": [
+            "AL",
+            "Integration",
+            "API",
+            "Job Queue",
+            "Business Central"
+        ],
+        "summary": "An outside system sends 100 records per $batch call, and in the busy hour the calls start timing out. I'll explain how I split the work into a fast receive-and-check part and a background posting part, with idempotency, our own status codes, retries that know which errors to retry, and a callback so the other system always knows what happened.",
+        "readingTime": 18
     }
 ]

@@ -415,5 +415,20 @@
         ],
         "summary": "An outside system sends 100 records per $batch call, and in the busy hour the calls start timing out. I'll explain how I split the work into a fast receive-and-check part and a background posting part, with idempotency, our own status codes, retries that know which errors to retry, and a callback so the other system always knows what happened.",
         "readingTime": 18
+    },
+    {
+        "slug": "2026-11-24-bc-cicd-azure-devops-without-alops",
+        "title": "CI/CD for Business Central in Azure DevOps, with only free Microsoft tools",
+        "date": "2026-11-24",
+        "type": "solution",
+        "tags": [
+            "CI/CD",
+            "Azure DevOps",
+            "DevOps",
+            "AL",
+            "Business Central"
+        ],
+        "summary": "A simple Azure DevOps pipeline that compiles a Business Central extension and publishes it to a sandbox on every push to main. No ALOps, no Docker, just Microsoft's free BcContainerHelper and one YAML file, explained step by step.",
+        "readingTime": 11
     }
 ]

@@ -4,7 +4,7 @@
 // ============================================================
 window.SITE = {
   name: 'Anil Kumar Paidimukkala',
-  role: 'Dynamics 365 Business Central Technical Consultant',
+  role: 'Dynamics 365 Business Central Techno-Functional Consultant',
   location: 'Chennai, India',
 
   // Shown on the home page hero
@@ -54,12 +54,13 @@ window.SITE = {
   },
 
   summary: [
-    'Dynamics 365 Business Central Technical Consultant with 3+ years delivering end-to-end BC solutions across ' +
-    'Manufacturing, Education and Finance Integration. I build extensions, approval workflows, posting logic, 50+ reports ' +
-    'and secure integrations (OData V4, REST, OAuth 2.0, SharePoint, callbacks).',
-    'I work from requirement gathering and solution design through AL development, testing, deployment, upgrades and ' +
-    'production support. My functional ground covers Purchase, Sales, General Ledger, Inventory and Lot Tracking, ' +
-    'Dimensions, Fixed Assets, Budgeting, Approvals, and India GST and TDS.'
+    'Dynamics 365 Business Central Techno-Functional Consultant with 3+ years across food and tea manufacturing, ' +
+    'education and logistics clients. I work directly with clients to gather requirements, write FDDs and TDDs and ' +
+    'design the solution, then build it in AL and support it through testing, go-live and production.',
+    'My functional ground covers Purchase and Procurement, Sales, Inventory and Lot Tracking, General Ledger, Dimensions, ' +
+    'Fixed Assets, Budgeting, Approvals, and India GST and TDS. On the technical side I build extensions, approval ' +
+    'workflows, posting logic, 50+ reports and secure integrations (OData V4, REST, OAuth 2.0, SharePoint, callbacks). ' +
+    'I am currently learning BC Manufacturing: production BOMs, routings, production orders and planning.'
   ],
 
   stats: [
@@ -111,11 +112,11 @@ window.SITE = {
       company: 'PwC India, Chennai',
       period: 'Aug 2023 – Present',
       bullets: [
-        'Delivered end-to-end AL solutions: design, development, testing, deployment, upgrades and support.',
-        'Extended standard behavior with events, subscribers, interfaces, RecordRef/FieldRef and reusable frameworks.',
+        'Delivered end-to-end solutions with clients: requirement gathering, FDD and TDD, solution design, development, testing, deployment and support.',
+        'Partnered with client users and stakeholders to turn their business processes into clear solution designs, extending standard BC with events and reusable frameworks.',
         'Implemented posting and finance logic: Purchase, Sales and G/L posting, item charge assignment, dimensions, India GST and TDS.',
         'Developed integrations and 50+ reports: API and web service integrations; RDLC, Word and Excel reports.',
-        'Ensured quality: debugging, code reviews, performance tuning and design documents, with Git and Azure DevOps.'
+        'Ensured quality: debugging, code reviews and performance tuning, with Git and Azure DevOps CI/CD pipelines.'
       ],
       projects: [
         {
@@ -161,11 +162,15 @@ window.SITE = {
   ],
 
   functional: [
-    'Purchase', 'Sales', 'General Ledger', 'Payables & Receivables', 'Item Journals & Lot Tracking',
-    'Dimensions', 'Fixed Assets', 'Budgeting', 'CAPEX / OPEX', 'Approval Workflows', 'India GST', 'India TDS'
+    'Purchase & Procurement', 'Sales', 'Inventory', 'General Ledger', 'Payables & Receivables', 'Item Journals & Lot Tracking',
+    'Item Reclassification', 'Dimensions', 'Fixed Assets', 'Budgeting', 'CAPEX / OPEX', 'Approval Workflows', 'India GST', 'India TDS',
+    'Manufacturing (learning)'
   ],
 
   skills: [
+    { group: 'Consulting',
+      items: ['Requirement Gathering', 'Client Engagement', 'Functional Design Documents (FDD)', 'Technical Design Documents (TDD)',
+              'Solution Design', 'Testing & UAT Support', 'Go-live & Production Support'] },
     { group: 'AL Development',
       items: ['BC Architecture', 'Extensions (PTE)', 'Tables', 'Pages', 'Codeunits', 'Reports', 'Queries', 'XMLports',
               'Interfaces', 'Enums', 'Events & Subscribers', 'Page Background Tasks', 'RecordRef / FieldRef', 'Permission Sets'] },
@@ -177,8 +182,8 @@ window.SITE = {
     { group: 'AI & Security',
       items: ['Azure OpenAI', 'System.AI', 'AI Agents', 'AES / RSA', 'Isolated Storage', 'SecretText'] },
     { group: 'Tools & Quality',
-      items: ['VS Code', 'Git', 'Azure DevOps', 'Debugging', 'Performance (SetLoadFields, SIFT)', 'Code Review',
-              'Unit Testing', 'Technical Design Documents', 'Upgrades', 'Production Support'] }
+      items: ['VS Code', 'Git', 'Azure DevOps CI/CD', 'Debugging', 'Performance (SetLoadFields, SIFT)', 'Code Review',
+              'Unit Testing', 'Upgrades', 'Deployments'] }
   ],
 
   certifications: [

@@ -430,5 +430,21 @@
         ],
         "summary": "A simple Azure DevOps pipeline that compiles a Business Central extension and publishes it to a sandbox on every push to main. No ALOps, no Docker, just Microsoft's free BcContainerHelper and one YAML file, explained step by step.",
         "readingTime": 11
+    },
+    {
+        "slug":  "2026-11-25-excel-workbook-inside-business-central",
+        "title":  "I built an Excel workbook inside Business Central (with GST vs GSTR-2B reconciliation)",
+        "date":  "2026-11-25",
+        "type":  "solution",
+        "tags":  [
+                     "Control Add-in",
+                     "Excel",
+                     "GST",
+                     "Reconciliation",
+                     "AL",
+                     "Business Central"
+                 ],
+        "summary":  "A full spreadsheet inside a BC page. Pull data from any table you can read, keep your formulas, refresh with one click, import and export .xlsx, and reconcile GST books against GSTR-2B in a few seconds.",
+        "readingTime":  7
     }
 ]

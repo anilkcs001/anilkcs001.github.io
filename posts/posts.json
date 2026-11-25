@@ -445,6 +445,6 @@
                      "Business Central"
                  ],
         "summary":  "A full spreadsheet inside a BC page. Pull data from any table you can read, keep your formulas, refresh with one click, import and export .xlsx, and reconcile GST books against GSTR-2B in a few seconds.",
-        "readingTime":  7
+        "readingTime":  9
     }
 ]

@@ -10,7 +10,33 @@ In every project I see the same thing. Users open a BC page, click **Open in Exc
 
 So I thought: why can't we do this inside Business Central itself?
 
-I built a small extension called **Excel Workbook**. It puts a real spreadsheet inside a BC page. In this post I'll show what it does, with screenshots, and explain how it works in simple words.
+## Where the idea came from
+
+The idea is not mine first. I got it from **Erik Hougaard**. He showed a spreadsheet running inside Business Central, with sheet areas linked to live BC data, and he has built it into a very advanced app called [Advanced Spreadsheets and Reporting](https://www.hougaard.com/spreadsheets/). His app does much more: financial reports, budgets with write-back, dashboards, drill-down and an AI agent. You can see his first prototype in [Business Central, but inside a Spreadsheet (but inside BC!)](https://www.hougaard.com/business-central-but-inside-a-spreadsheet-but-inside-bc/).
+
+When I saw it, I wanted to learn how this works. So I tried to build my own simple version, focused on one problem I see often in India: **reconciliation**. This post is about that try. Thank you, Erik, for the idea.
+
+## What is the use, in simple words?
+
+Think about the work finance users do every month:
+
+1. Take data out of BC into Excel.
+2. Take another Excel file from outside (GSTR-2B, a bank statement, a vendor's statement).
+3. Match both with VLOOKUP and find what is different.
+4. Next month, do it all again from the start.
+
+With this tool, all four steps happen **inside BC**. You build the workbook once. Next month you open it, change the date filter, import the new file and click **Refresh**. The matching runs again by itself.
+
+Here are the kinds of work you can do with it:
+
+![Six uses of the Excel Workbook: GST vs GSTR-2B, bank reconciliation, vendor or customer statement, monthly MIS, stock check and data migration check](images/excel-workbook-in-bc/0-what-you-can-do.jpg)
+
+- **GST vs GSTR-2B:** find invoices the vendor didn't file, invoices we didn't book, and amount differences, before you claim ITC.
+- **Bank reconciliation:** match the bank ledger with the bank statement by amount and date.
+- **Vendor or customer statement:** at year end, match our ledger with their statement for balance confirmation.
+- **Monthly MIS:** load G/L entries, add your own formulas, and just refresh every month.
+- **Stock check:** join BC stock with the physical count sheet and see the difference per item.
+- **Data migration check:** before go-live, compare the old system's Excel with what came into BC.
 
 ## What it can do
 
@@ -97,7 +123,9 @@ The matching goes in passes, and each row is used only once:
 
 ## Wrap-up
 
-This started as "can I avoid downloading Excel every month?", and now GST reconciliation that took hours with VLOOKUPs takes a few seconds inside BC. The same idea works for any report users keep rebuilding in Excel.
+This is my simple version of Erik Hougaard's idea. If you want the full, advanced product, look at his app. For me, building this taught me a lot about control add-ins, RecordRef and moving big data between AL and JavaScript.
+
+It started as "can I avoid downloading Excel every month?", and now GST reconciliation that took hours with VLOOKUPs takes a few seconds inside BC. The same idea works for any report users keep rebuilding in Excel.
 
 The screenshots use demo data. All vendor names and GSTINs are made up.
 

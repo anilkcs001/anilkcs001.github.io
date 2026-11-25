@@ -121,6 +121,14 @@ The matching goes in passes, and each row is used only once:
 - Charts, pivot tables and macros are not supported.
 - BC can't ask "close without saving?" on this kind of page, so keep AutoSave on.
 
+## Get the code
+
+The full code is on GitHub: [anilkcs001/BC-Excel-Workbook](https://github.com/anilkcs001/BC-Excel-Workbook). It's free under the MIT licence.
+
+It has the AL objects (table, pages, codeunits, permission set), the control add-in with its JavaScript and CSS, and a README with setup steps. Open the folder in VS Code, set your sandbox in `launch.json`, download symbols and press F5. Then give users the **AK Workbook** permission set.
+
+One honest note: I tested the JavaScript fully in the browser, but please compile and test the AL in your own sandbox before you use it anywhere real.
+
 ## Wrap-up
 
 This is my simple version of Erik Hougaard's idea. If you want the full, advanced product, look at his app. For me, building this taught me a lot about control add-ins, RecordRef and moving big data between AL and JavaScript.
@@ -129,4 +137,4 @@ It started as "can I avoid downloading Excel every month?", and now GST reconcil
 
 The screenshots use demo data. All vendor names and GSTINs are made up.
 
-If you have questions, or you want to try something like this in your project, ask below or message me on LinkedIn.
+If you have questions, or you try it in your project, ask below or message me on LinkedIn. Issues and suggestions on GitHub are also welcome.

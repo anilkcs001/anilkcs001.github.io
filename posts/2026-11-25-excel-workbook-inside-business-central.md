@@ -12,9 +12,30 @@ So I thought: why can't we do this inside Business Central itself?
 
 ## Where the idea came from
 
-The idea is not mine first. I got it from **Erik Hougaard**. He showed a spreadsheet running inside Business Central, with sheet areas linked to live BC data, and he has built it into a very advanced app called [Advanced Spreadsheets and Reporting](https://www.hougaard.com/spreadsheets/). His app does much more: financial reports, budgets with write-back, dashboards, drill-down and an AI agent. You can see his first prototype in [Business Central, but inside a Spreadsheet (but inside BC!)](https://www.hougaard.com/business-central-but-inside-a-spreadsheet-but-inside-bc/).
+The idea is not mine first. I got it from **Erik Hougaard**. He showed a spreadsheet running inside Business Central, with parts of the sheet linked to live BC data. You can see his first prototype in [Business Central, but inside a Spreadsheet (but inside BC!)](https://www.hougaard.com/business-central-but-inside-a-spreadsheet-but-inside-bc/).
 
-When I saw it, I wanted to learn how this works. So I tried to build my own simple version, focused on one problem I see often in India: **reconciliation**. This post is about that try. Thank you, Erik, for the idea.
+Today it is a full app called [Advanced Spreadsheets and Reporting](https://www.hougaard.com/spreadsheets/), and it is very advanced:
+
+- **Live regions:** link a part of the sheet to a table, financial report, G/L budget, query, report, SQL, pivot or FlowField. It reads BC again on every recalculation.
+- **Slicers:** a cell becomes a filter (This Month, Year to Date, a dimension, a customer), and the whole sheet follows it.
+- **Write-back:** type budgets, journal lines or sales and purchase lines in the sheet, and BC validates them like the normal page.
+- **Formulas are real AL,** run on the server with his own AL compiler and interpreter.
+- **Charts, KPI cards and drill-down:** Ctrl+click a number and the entries behind it open.
+- **Financial reporting:** rows from any table, many companies, scheduled distribution and APIs for Power BI.
+- **An AI agent** that builds the dashboard for you.
+
+He also has many short videos on that page showing each feature. Please watch them.
+
+When I saw it, I wanted to learn how this kind of thing works. So I tried to build my own simple version. My version is much smaller:
+
+| | Erik's app | My try |
+|---|---|---|
+| Where it calculates | On the BC server, in AL | In the browser (JavaScript) |
+| Formulas | AL, plus Excel functions like SUM and XLOOKUP | Normal Excel formulas |
+| Writes back to BC | Yes | No, read-only |
+| Main focus | Reporting, budgets, dashboards | Reconciliation (GST, bank, party ledger) |
+
+I focused on one problem I see often in India: **reconciliation**. This post is about that try. Thank you, Erik, for the idea.
 
 ## What is the use, in simple words?
 
